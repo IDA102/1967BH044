@@ -1,0 +1,2 @@
+platform shell jem write reg 0x1F0080 0x00380000 0x00380000
+platform shell jem write reg 0x1F0084 0x1

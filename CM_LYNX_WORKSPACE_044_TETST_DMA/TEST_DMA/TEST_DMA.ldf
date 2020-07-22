@@ -1,0 +1,130 @@
+#if defined(__1967VN028R2__)
+	#define INT_MEM_BANK_SIZE  0x20000  // Internal memory blocks are 0x20000 (128k)
+#elif defined(__1967VN044__)
+	#define INT_MEM_BANK_SIZE  0x10000  // Internal memory blocks are 0x10000 (64k)
+#else
+	#define INT_MEM_BANK_SIZE  0x10000  // Internal memory blocks are 0x10000 (64k)
+#endif
+
+ARCHITECTURE(ADSP-TS201)
+
+$OBJECTS =  $COMMAND_LINE_OBJECTS;
+
+MEMORY
+{
+    M0Code      { TYPE(RAM) START(0x00000000) END(0x00000000 + (INT_MEM_BANK_SIZE - 1)) WIDTH(32) }
+    M2DataA     { TYPE(RAM) START(0x00040000) END(0x00040000 + (INT_MEM_BANK_SIZE - 1)) WIDTH(32) }
+    M4DataA     { TYPE(RAM) START(0x00080000) END(0x00080000 + (INT_MEM_BANK_SIZE - 1)) WIDTH(32) }
+    M6Stack     { TYPE(RAM) START(0x000C0000) END(0x000C0000 + (INT_MEM_BANK_SIZE - 1)) WIDTH(32) }
+    M8Stack     { TYPE(RAM) START(0x00100000) END(0x00100000 + (INT_MEM_BANK_SIZE - 1)) WIDTH(32) }
+    M10Heap     { TYPE(RAM) START(0x00140000) END(0x00140000 + (INT_MEM_BANK_SIZE - 1)) WIDTH(32) }
+
+    MS0         { TYPE(RAM) START(0x30000000) END(0x37FFFFFF) WIDTH(32) }
+    MS1         { TYPE(RAM) START(0x38000000) END(0x3FFFFFFF) WIDTH(32) }
+    MSSD0       { TYPE(RAM) START(0x40000000) END(0x43FFFFFF) WIDTH(32) }
+    MSSD1       { TYPE(RAM) START(0x50000000) END(0x53FFFFFF) WIDTH(32) }
+    MSSD2       { TYPE(RAM) START(0x60000000) END(0x63FFFFFF) WIDTH(32) }
+    MSSD3       { TYPE(RAM) START(0x70000000) END(0x73FFFFFF) WIDTH(32) }
+
+// Memory blocks need to be less than 2 Gig.
+    HOST        { TYPE(RAM) START(0x80000000) END(0x8FFFFFFF) WIDTH(32) }
+    HOST1       { TYPE(RAM) START(0x90000000) END(0xAFFFFFFF) WIDTH(32) }
+    HOST2       { TYPE(RAM) START(0xB0000000) END(0xCFFFFFFF) WIDTH(32) }
+    HOST3       { TYPE(RAM) START(0xD0000000) END(0xEFFFFFFF) WIDTH(32) }
+    HOST4       { TYPE(RAM) START(0xF0000000) END(0xFFFFFFFF) WIDTH(32) }
+}
+
+PROCESSOR P0
+{
+//    RESOLVE( _____system_start, 0x00000100 )
+    KEEP( _____system_start,  main, _llvm.used )
+
+    OUTPUT( $COMMAND_LINE_OUTPUT_FILE )
+
+    SECTIONS
+    {
+        program
+        {
+            FILL(0xb3c00000) // Fill any gaps with NOPs.
+            INPUT_SECTION_ALIGN(4)
+            INPUT_SECTIONS( StartUp.doj(.program) )
+            INPUT_SECTIONS( $OBJECTS(.program*) )
+            INPUT_SECTIONS( $OBJECTS(llvm.metadata) )
+
+            // The next line adds 10 nops after the last piece of code in the 
+            // code section. This is required on TS201 to prevent uninitialised 
+            // memory getting into the pipeline.
+             . = . + 10;
+
+        } >M0Code
+
+        cdata
+        {
+            INPUT_SECTIONS( $OBJECTS(.cdata*) )
+            INPUT_SECTIONS( $OBJECTS(.strings*) )
+
+            ldf_ctor_start = .;
+            INPUT_SECTIONS( $OBJECTS(.ctor0) )
+            INPUT_SECTIONS( $OBJECTS(.ctor1) )
+            INPUT_SECTIONS( $OBJECTS(.ctor2) )
+            INPUT_SECTIONS( $OBJECTS(.ctor3) )
+            INPUT_SECTIONS( $OBJECTS(.ctor4) )
+            INPUT_SECTIONS( $OBJECTS(.ctor5) )
+            ldf_ctor_end = .;
+
+        } >M0Code
+
+        bss ZERO_INIT
+        {
+            bss_start = .;
+            INPUT_SECTIONS( $OBJECTS(.bss*) )
+            bss_end = .;
+        } >M2DataA
+
+        data
+        {
+            INPUT_SECTIONS( $OBJECTS(.data*) )
+        } >M4DataA
+
+        ehframe
+        {
+        	_g_ldf_eh_frame_start = .;
+            INPUT_SECTIONS( $OBJECTS(.eh_frame) )
+        	_g_ldf_eh_frame_end = .;
+        } >M4DataA
+
+        gccexcepttable
+        {
+        	_g_ldf_except_table_start = .;
+            INPUT_SECTIONS( $OBJECTS(.gcc_except_table) )
+        } >M4DataA
+
+        // Allocate stacks for the application. Note that stacks
+        // grow downward, and must be quad-word aligned. This means
+        // that the location just after the highest word of the stack
+        // is quad-word aligned (evenly divisible by 4). There are two
+        // labels for each stack: "*_base" is the location just ABOVE
+        // the top of the stack, and "*_limit" is the lowest word that
+        // is part of the stack. Each stack occupies all of its own
+        // memory block.
+
+        jstackseg
+        {
+            ldf_jstack_limit = .;
+            ldf_jstack_base = . + MEMORY_SIZEOF(M6Stack);
+        } >M6Stack
+
+        kstackseg
+        {
+            ldf_kstack_limit = .;
+            ldf_kstack_base = . + MEMORY_SIZEOF(M8Stack);
+        } >M8Stack
+
+        // The default heap occupies its own memory block
+        defheapseg
+        {
+            _ldf_defheap_base = .;
+            _ldf_defheap_size = MEMORY_SIZEOF(M10Heap);
+        } >M10Heap
+    }
+}

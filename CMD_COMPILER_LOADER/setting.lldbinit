@@ -1,0 +1,17 @@
+settings set target.load-cwd-lldbinit true
+platform select remote-lynx
+platform connect connect://localhost:11000
+settings set platform.plugin.lynx.jem_config_file "Flasher.jem"
+settings set platform.plugin.lynx.jem_freq 4
+settings set platform.plugin.lynx.jem_use_reset 0
+settings set platform.plugin.lynx.debugger_type 1
+settings set platform.plugin.lynx.chip_id 0x11
+settings set platform.plugin.lynx.chip_number 1
+platform shell jem connect
+settings set target.process.disable-memory-cache false
+settings set platform.plugin.lynx.sfr_file "c:\Milandr\CM-LYNX.2.01.02\SFR\Milandr\1967\1967VN044.sfr"
+settings set platform.plugin.lynx.cores 0
+file main.dxe
+platform shell jem reset --halt --cores 0
+process launch
+q

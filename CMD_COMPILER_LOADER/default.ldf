@@ -1,0 +1,304 @@
+#if defined(__1967VN028R2__)
+	#define INT_MEM_BANK_SIZE  0x20000  // Internal memory blocks are 0x20000 (128k)
+#elif defined(__1967VN044__)
+	#define INT_MEM_BANK_SIZE  0x10000  // Internal memory blocks are 0x10000 (64k)
+#else
+	#define INT_MEM_BANK_SIZE  0x10000  // Internal memory blocks are 0x10000 (64k)
+#endif
+
+#define JSTACK_SIZE  INT_MEM_BANK_SIZE
+#define JSTACK_RSRV  0x2000
+#define KSTACK_SIZE  0x220
+
+ARCHITECTURE(ADSP-TS201)
+
+$OBJECTS =  $COMMAND_LINE_OBJECTS;
+
+MEMORY
+{
+#ifdef __1967VN058__
+    L2SRAM   { TYPE(RAM) START(0x00000000) END(0x0001FFFF) WIDTH(32) }  //512 kb
+    L1PSRAM  { TYPE(RAM) START(0x00080000) END(0x00081FFF) WIDTH(32) }  //32 kb
+    L1DSRAM  { TYPE(RAM) START(0x000A0000) END(0x000A3FFF) WIDTH(32) }  //64 kb
+    KREGS    { TYPE(RAM) START(0x000BFC00) END(0x000BFFFF) WIDTH(32) }
+    PER      { TYPE(RAM) START(0x000C0000) END(0x000DFFFF) WIDTH(32) }
+    ECC      { TYPE(RAM) START(0x000E0000) END(0x000E27FF) WIDTH(32) }
+    //L3 - 3 Mb
+    L3_MEM   { TYPE(RAM) START(0x00100000) END(0x001BFFFF) WIDTH(32) }
+    L3_RSV   { TYPE(RAM) START(0x001C0000) END(0x00FFFFFF) WIDTH(32) }  //57 Mb (The end is not 0x001FFFFF as doc says)
+
+    KCROSS   { TYPE(RAM) START(0x01000000) END(0x01FFFFFF) WIDTH(32) }
+    MROM     { TYPE(RAM) START(0x02000000) END(0x02FFFFFF) WIDTH(32) }
+    MACSRAM  { TYPE(RAM) START(0x03000000) END(0x03FFFFFF) WIDTH(32) }
+    EXTMEM   { TYPE(RAM) START(0x04000000) END(0x0FFFFFFF) WIDTH(32) }
+    RSV      { TYPE(RAM) START(0x10000000) END(0x1FFFFFFF) WIDTH(32) }
+    DDR0     { TYPE(RAM) START(0x20000000) END(0x3FFFFFFF) WIDTH(32) }  //MAX 2 Gb
+    DDR1     { TYPE(RAM) START(0x40000000) END(0xBFFFFFFF) WIDTH(32) }  //MAX 8 Gb
+    // Interprocessor space 0xD0000000 - 0xFFFFFFFF:
+    nBMS     { TYPE(RAM) START(0xD0000000) END(0xD2FFFFFF) WIDTH(32) }  //128 Mb
+    ID0      { TYPE(RAM) START(0xD4000000) END(0xD4FFFFFF) WIDTH(32) }  //64 Mb
+    ID1      { TYPE(RAM) START(0xD5000000) END(0xD5FFFFFF) WIDTH(32) }
+    ID2      { TYPE(RAM) START(0xD6000000) END(0xD6FFFFFF) WIDTH(32) }
+    ID3      { TYPE(RAM) START(0xD7000000) END(0xD7FFFFFF) WIDTH(32) }
+    ID4      { TYPE(RAM) START(0xD8000000) END(0xD8FFFFFF) WIDTH(32) }
+    ID5      { TYPE(RAM) START(0xD9000000) END(0xD9FFFFFF) WIDTH(32) }
+    ID6      { TYPE(RAM) START(0xDA000000) END(0xDAFFFFFF) WIDTH(32) }
+    ID7      { TYPE(RAM) START(0xDB000000) END(0xDBFFFFFF) WIDTH(32) }  //128 Mb
+    nMS0     { TYPE(RAM) START(0xDC000000) END(0xDDFFFFFF) WIDTH(32) }  //128 Mb
+    nMS1     { TYPE(RAM) START(0xDE000000) END(0xDFFFFFFF) WIDTH(32) }
+    DDRHOST  { TYPE(RAM) START(0xE0000000) END(0xEFFFFFFF) WIDTH(32) }  //1 Gb
+    nMSH     { TYPE(RAM) START(0xF0000000) END(0xFFFFFFFF) WIDTH(32) }  //1 Gb
+#else  // Not __1967VN058__
+    M_STARTUP{ TYPE(RAM) START(0x00000000) END(0x000000FF - 16) WIDTH(32) }  //GermanT: reserved for StartUp .
+    M0       { TYPE(RAM) START(0x00000100) END(0x00000000 + (INT_MEM_BANK_SIZE - 1) - 16) WIDTH(32) }
+    M1       { TYPE(RAM) START(0x00040000) END(0x00040000 + (INT_MEM_BANK_SIZE - 1) - 16) WIDTH(32) }
+    M2       { TYPE(RAM) START(0x00080000) END(0x00080000 + (INT_MEM_BANK_SIZE - 1) - 16) WIDTH(32) }
+    M3       { TYPE(RAM) START(0x000C0000) END(0x000C0000 + (INT_MEM_BANK_SIZE - 1) - 16) WIDTH(32) }
+    M4       { TYPE(RAM) START(0x00100000) END(0x00100000 + (INT_MEM_BANK_SIZE - 1)) WIDTH(32) }
+    M5       { TYPE(RAM) START(0x00140000) END(0x00140000 + (INT_MEM_BANK_SIZE - 1)) WIDTH(32) }
+
+    MS0         { TYPE(RAM) START(0x30000000) END(0x37FFFFFF) WIDTH(32) }
+    MS1         { TYPE(RAM) START(0x38000000) END(0x3FFFFFFF) WIDTH(32) }
+    MSSD0       { TYPE(RAM) START(0x40000000) END(0x43FFFFFF) WIDTH(32) }
+    MSSD1       { TYPE(RAM) START(0x50000000) END(0x53FFFFFF) WIDTH(32) }
+    MSSD2       { TYPE(RAM) START(0x60000000) END(0x63FFFFFF) WIDTH(32) }
+    MSSD3       { TYPE(RAM) START(0x70000000) END(0x73FFFFFF) WIDTH(32) }
+
+// Memory blocks need to be less than 2 Gig.
+    HOST        { TYPE(RAM) START(0x80000000) END(0x8FFFFFFF) WIDTH(32) }
+    HOST1       { TYPE(RAM) START(0x90000000) END(0xAFFFFFFF) WIDTH(32) }
+    HOST2       { TYPE(RAM) START(0xB0000000) END(0xCFFFFFFF) WIDTH(32) }
+    HOST3       { TYPE(RAM) START(0xD0000000) END(0xEFFFFFFF) WIDTH(32) }
+    HOST4       { TYPE(RAM) START(0xF0000000) END(0xFFFFFFFF) WIDTH(32) }
+#endif
+}
+
+PROCESSOR P0
+{
+//    RESOLVE( _____system_start, 0x00000100 )
+    KEEP( _____system_start,  main, _llvm.used, __sw_handler_ctor )
+
+    OUTPUT( $COMMAND_LINE_OUTPUT_FILE )
+
+    SECTIONS
+    {
+#ifdef __1967VN058__
+        program0
+        {
+            FILL(0xb3c00000) // Fill any gaps with NOPs.
+            INPUT_SECTION_ALIGN(4)
+            INPUT_SECTIONS( StartUpVN058.doj(.program) )
+
+            // The next line adds 10 nops after the last piece of code in the 
+            // code section. This is required on TS201 to prevent uninitialised 
+            // memory getting into the pipeline.
+            . = . + 10;
+        } >L3_MEM // Execution starts at 0x100000
+        program
+        {
+            FILL(0xb3c00000) // Fill any gaps with NOPs.
+            INPUT_SECTION_ALIGN(4)
+            INPUT_SECTIONS( $OBJECTS(.program*) )
+            INPUT_SECTIONS( $OBJECTS(llvm.metadata) )
+
+            // The next line adds 10 nops after the last piece of code in the 
+            // code section. This is required on TS201 to prevent uninitialised 
+            // memory getting into the pipeline.
+            . = . + 10;
+        } >L3_MEM
+
+        cdata
+        {
+            INPUT_SECTIONS( $OBJECTS(.cdata*) )
+            INPUT_SECTIONS( $OBJECTS(.strings*) )
+
+            ldf_ctor_start = .;
+            INPUT_SECTIONS( $OBJECTS(.ctor0) )
+            INPUT_SECTIONS( $OBJECTS(.ctor1) )
+            INPUT_SECTIONS( $OBJECTS(.ctor2) )
+            INPUT_SECTIONS( $OBJECTS(.ctor3) )
+            INPUT_SECTIONS( $OBJECTS(.ctor4) )
+            INPUT_SECTIONS( $OBJECTS(.ctor5) )
+            ldf_ctor_end = .;
+        } >L3_MEM
+
+        bss ZERO_INIT
+        {
+            bss_start = .;
+            INPUT_SECTIONS( $OBJECTS(.bss*) )
+            bss_end = .;
+        } >L3_MEM
+
+        data
+        {
+            INPUT_SECTIONS( $OBJECTS(.data*) )
+        } >L3_MEM
+
+        ehframe
+        {
+            _g_ldf_eh_frame_start = .;
+            INPUT_SECTIONS( $OBJECTS(.eh_frame) )
+            _g_ldf_eh_frame_end = .;
+        } >L3_MEM
+
+        gccexcepttable
+        {
+            _g_ldf_except_table_start = .;
+            INPUT_SECTIONS( $OBJECTS(.gcc_except_table*) )
+        } >L3_MEM
+
+        // Allocate stacks for the application. Note that stacks
+        // grow downward, and must be quad-word aligned. This means
+        // that the location just after the highest word of the stack
+        // is quad-word aligned (evenly divisible by 4). There are two
+        // labels for each stack: "*_base" is the location just ABOVE
+        // the top of the stack, and "*_limit" is the lowest word that
+        // is part of the stack.
+
+        kstackseg NO_INIT
+        {
+            ldf_kstack_limit = .;
+            ldf_kstack_base = . + KSTACK_SIZE;
+            . = ldf_kstack_base;
+        } >L3_MEM
+
+        defheapseg NO_INIT
+        {
+            _ldf_defheap_base = .;
+            _ldf_defheap_size = (MEMORY_END(L3_MEM) - . + 1) - JSTACK_SIZE;
+            . = . + _ldf_defheap_size;
+        } >L3_MEM
+
+        jstackseg NO_INIT
+        {
+            ldf_jstack_limit = .;
+            ldf_jstack_base = . + JSTACK_SIZE;
+            _ldf_jstack_rsrv = ldf_jstack_base - JSTACK_RSRV;
+            . = ldf_jstack_base;
+        } >L3_MEM
+
+#else  // Not __1967VN058__
+
+#define DATA_REGION(bank_num)                                 \
+        data##bank_num                                        \
+        {                                                     \
+            INPUT_SECTIONS( $OBJECTS(.data*) )                \
+        } >M##bank_num
+#define PROGRAM_REGION(bank_num)                              \
+        program##bank_num                                     \
+        {                                                     \
+            FILL(0xb3c00000)  /* Fill any gaps with NOPs. */  \
+            INPUT_SECTION_ALIGN(4)                            \
+            INPUT_SECTIONS( $OBJECTS(.program*) )             \
+            . = . + 10;  /* 10 NOPs */                        \
+        } >M##bank_num
+
+#define ADD_HEAP_SEG(seg_num, bank_num)                                       \
+        addheapseg_##seg_num NO_INIT                                          \
+        {                                                                     \
+            _ldf_addheap_base_##seg_num = .;                                  \
+            _ldf_addheap_size_##seg_num = (MEMORY_END(M##bank_num) - .) + 1;  \
+            . = MEMORY_END(M##bank_num) + 1;                                  \
+        } >M##bank_num
+
+        startup
+        {
+            FILL(0xb3c00000) // Fill any gaps with NOPs.
+            INPUT_SECTION_ALIGN(4)
+            INPUT_SECTIONS( StartUp.doj(.program) )
+
+            // The next line adds 10 nops after the last piece of code in the 
+            // code section. This is required on TS201 to prevent uninitialised 
+            // memory getting into the pipeline.
+            . = . + 10;
+        } >M_STARTUP
+
+        cdata
+        {
+            ldf_ctor_start = .;
+            INPUT_SECTIONS( $OBJECTS(.ctor0) )
+            INPUT_SECTIONS( $OBJECTS(.ctor1) )
+            INPUT_SECTIONS( $OBJECTS(.ctor2) )
+            INPUT_SECTIONS( $OBJECTS(.ctor3) )
+            INPUT_SECTIONS( $OBJECTS(.ctor4) )
+            INPUT_SECTIONS( $OBJECTS(.ctor5) )
+            ldf_ctor_end = .;
+
+            INPUT_SECTIONS( $OBJECTS(.cdata*) )
+            INPUT_SECTIONS( $OBJECTS(.strings*) )
+            INPUT_SECTIONS( $OBJECTS(llvm.metadata) )
+        } >M0
+        PROGRAM_REGION(0)
+
+        bss ZERO_INIT
+        {
+            bss_start = .;
+            INPUT_SECTIONS( $OBJECTS(.bss*) )
+            bss_end = .;
+        } >M1
+
+        ehframe
+        {
+            _g_ldf_eh_frame_start = .;
+            INPUT_SECTIONS( $OBJECTS(.eh_frame) )
+            _g_ldf_eh_frame_end = .;
+        } >M2
+        gccexcepttable
+        {
+            _g_ldf_except_table_start = .;
+            INPUT_SECTIONS( $OBJECTS(.gcc_except_table*) )
+        } >M2
+        DATA_REGION(2)
+
+        // Allocate stacks for the application. Note that stacks
+        // grow downward, and must be quad-word aligned. This means
+        // that the location just after the highest word of the stack
+        // is quad-word aligned (evenly divisible by 4). There are two
+        // labels for each stack: "*_base" is the location just ABOVE
+        // the top of the stack, and "*_limit" is the lowest word that
+        // is part of the stack. Each stack occupies all of its own
+        // memory block.
+
+        // Stack K is very small. 
+        kstackseg NO_INIT
+        {
+            ldf_kstack_limit = .;
+            ldf_kstack_base = . + KSTACK_SIZE;
+            . = ldf_kstack_base;
+        } >M3
+
+        // Use the remaining free space - order is essential!
+        // Try not to place data and code in the same bank.
+        PROGRAM_REGION(3)
+        PROGRAM_REGION(1)
+        PROGRAM_REGION(2)
+        DATA_REGION(1)
+        DATA_REGION(3)
+        DATA_REGION(0)
+
+        // Additional heap segments occupy the rests (if any) of all segments.
+        // ADD_HEAP_SEG(1, 0)  // Uncomment this line if you want to add default code segment for heap space.
+        ADD_HEAP_SEG(2, 1)
+        ADD_HEAP_SEG(3, 2)
+        ADD_HEAP_SEG(4, 3)
+
+        // The default heap occupies its own memory block
+        defheapseg NO_INIT
+        {
+            _ldf_defheap_base = .;
+            _ldf_defheap_size = MEMORY_SIZEOF(M4);
+            . = . + _ldf_defheap_size;
+        } >M4
+
+        // Stack J is large. 
+        jstackseg NO_INIT
+        {
+            ldf_jstack_limit = .;
+            ldf_jstack_base = . + JSTACK_SIZE;
+            _ldf_jstack_rsrv = ldf_jstack_base - JSTACK_RSRV;
+            . = ldf_jstack_base;
+        } >M5
+
+#endif
+    }
+}

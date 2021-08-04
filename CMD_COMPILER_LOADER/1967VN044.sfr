@@ -1,0 +1,5241 @@
+;****************************************************************************
+;                                                                            
+; Tag description:                                                          
+; [<Name>]               there, <Name> - SFR Name.                           
+; [[<Name>]]             there, <Name> - Name of Child SFR or Bit field.
+; AddrSpace = <0|1|2|255>  there, I/O type -
+;								0 - block memory 32-bit I/O through cyclic buffer transaction,
+;								1 - direct register 32-128 bit I/O through EMUDAT, 
+;									base IR opcodes: read=0x88003D04, write=0x8BA20080,
+;									virtual I/O as 255 if Addr < ox24ff,
+;								2 - indirect memory 32-bit I/O through XR0,
+;                               255 - non-memory mapped registers I/O (virtual),
+;								other - as 2
+;                               Default value = 1.
+; Addr = <addr>          there, <addr> - hexadecimal value
+; Size = <size>          there, <size> - SFR size in 32-bit words
+;                               Default value = 1.
+; Access = <0|1|2>       there, 0 - read/write,
+;                               1 - read only,
+;                               2 - write only.
+;                               Default value = 0.
+;
+;****************************************************************************
+
+
+[Options]
+DefaultVisibleOnTop = 0
+
+
+[Register Sets]
+
+
+[Registers]
+
+[PC]
+AddrSpace=0xFF
+Addr = 0x0000
+
+;--- Compute Block X Register Group ---
+[XR0]
+Addr = 0x1E0000
+Size = 1
+
+[XR1]
+Addr = 0x1E0001
+Size = 1
+
+[XR2]
+Addr = 0x1E0002
+Size = 1
+
+[XR3]
+Addr = 0x1E0003
+Size = 1
+
+[XR4]
+Addr = 0x1E0004
+Size = 1
+
+[XR5]
+Addr = 0x1E0005
+Size = 1
+
+[XR6]
+Addr = 0x1E0006
+Size = 1
+
+[XR7]
+Addr = 0x1E0007
+Size = 1
+
+[XR8]
+Addr = 0x1E0008
+Size = 1
+
+[XR9]
+Addr = 0x1E0009
+Size = 1
+
+[XR10]
+Addr = 0x1E000A
+Size = 1
+
+[XR11]
+Addr = 0x1E000B
+Size = 1
+
+[XR12]
+Addr = 0x1E000C
+Size = 1
+
+[XR13]
+Addr = 0x1E000D
+Size = 1
+
+[XR14]
+Addr = 0x1E000E
+Size = 1
+
+[XR15]
+Addr = 0x1E000F
+Size = 1
+
+[XR16]
+Addr = 0x1E0010
+Size = 1
+
+[XR17]
+Addr = 0x1E0011
+Size = 1
+
+[XR18]
+Addr = 0x1E0012
+Size = 1
+
+[XR19]
+Addr = 0x1E0013
+Size = 1
+
+[XR20]
+Addr = 0x1E0014
+Size = 1
+
+[XR21]
+Addr = 0x1E0015
+Size = 1
+
+[XR22]
+Addr = 0x1E0016
+Size = 1
+
+[XR23]
+Addr = 0x1E0017
+Size = 1
+
+[XR24]
+Addr = 0x1E0018
+Size = 1
+
+[XR25]
+Addr = 0x1E0019
+Size = 1
+
+[XR26]
+Addr = 0x1E001A
+Size = 1
+
+[XR27]
+Addr = 0x1E001B
+Size = 1
+
+[XR28]
+Addr = 0x1E001C
+Size = 1
+
+[XR29]
+Addr = 0x1E001D
+Size = 1
+
+[XR30]
+Addr = 0x1E001E
+Size = 1
+
+[XR31]
+Addr = 0x1E001F
+Size = 1
+
+;--- Compute Block Y Register Group ---
+[YR0]
+Addr = 0x1E0040
+Size = 1
+
+[YR1]
+Addr = 0x1E0041
+Size = 1
+
+[YR2]
+Addr = 0x1E0042
+Size = 1
+
+[YR3]
+Addr = 0x1E0043
+Size = 1
+
+[YR4]
+Addr = 0x1E0044
+Size = 1
+
+[YR5]
+Addr = 0x1E0045
+Size = 1
+
+[YR6]
+Addr = 0x1E0046
+Size = 1
+
+[YR7]
+Addr = 0x1E0047
+Size = 1
+
+[YR8]
+Addr = 0x1E0048
+Size = 1
+
+[YR9]
+Addr = 0x1E0049
+Size = 1
+
+[YR10]
+Addr = 0x1E004A
+Size = 1
+
+[YR11]
+Addr = 0x1E004B
+Size = 1
+
+[YR12]
+Addr = 0x1E004C
+Size = 1
+
+[YR13]
+Addr = 0x1E004D
+Size = 1
+
+[YR14]
+Addr = 0x1E004E
+Size = 1
+
+[YR15]
+Addr = 0x1E004F
+Size = 1
+
+[YR16]
+Addr = 0x1E0050
+Size = 1
+
+[YR17]
+Addr = 0x1E0051
+Size = 1
+
+[YR18]
+Addr = 0x1E0052
+Size = 1
+
+[YR19]
+Addr = 0x1E0053
+Size = 1
+
+[YR20]
+Addr = 0x1E0054
+Size = 1
+
+[YR21]
+Addr = 0x1E0055
+Size = 1
+
+[YR22]
+Addr = 0x1E0056
+Size = 1
+
+[YR23]
+Addr = 0x1E0057
+Size = 1
+
+[YR24]
+Addr = 0x1E0058
+Size = 1
+
+[YR25]
+Addr = 0x1E0059
+Size = 1
+
+[YR26]
+Addr = 0x1E005A
+Size = 1
+
+[YR27]
+Addr = 0x1E005B
+Size = 1
+
+[YR28]
+Addr = 0x1E005C
+Size = 1
+
+[YR29]
+Addr = 0x1E005D
+Size = 1
+
+[YR30]
+Addr = 0x1E005E
+Size = 1
+
+[YR31]
+Addr = 0x1E005F
+Size = 1
+
+;--- Compute Block X Non-Memory-Mapped Register Group ---
+[XSTAT]
+AddrSpace=0xFF
+Addr = 0x223F
+
+[XPR]
+AddrSpace=0xFF
+Addr = 0x2260
+Size=2
+[[XPR0]]
+[[XPR1]]
+
+[XMR0]
+AddrSpace=0xFF
+Addr = 0x2280
+
+[XMR1]
+AddrSpace=0xFF
+Addr = 0x2281
+
+[XMR2]
+AddrSpace=0xFF
+Addr = 0x2282
+
+[XMR3]
+AddrSpace=0xFF
+Addr = 0x2283
+
+[XMR4]
+AddrSpace=0xFF
+Addr = 0x2284
+
+[XBFOTMP]
+AddrSpace=0xFF
+Addr = 0x22A0
+Size=2
+[[XBFOTMP0]]
+[[XBFOTMP1]]
+
+[XTR0]
+AddrSpace=0xFF
+Addr = 0x22C0
+
+[XTR1]
+AddrSpace=0xFF
+Addr = 0x22C1
+
+[XTR2]
+AddrSpace=0xFF
+Addr = 0x22C2
+
+[XTR3]
+AddrSpace=0xFF
+Addr = 0x22C3
+
+[XTR4]
+AddrSpace=0xFF
+Addr = 0x22C4
+
+[XTR5]
+AddrSpace=0xFF
+Addr = 0x22C5
+
+[XTR6]
+AddrSpace=0xFF
+Addr = 0x22C6
+
+[XTR7]
+AddrSpace=0xFF
+Addr = 0x22C7
+
+[XTR8]
+AddrSpace=0xFF
+Addr = 0x22C8
+
+[XTR9]
+AddrSpace=0xFF
+Addr = 0x22C9
+
+[XTR10]
+AddrSpace=0xFF
+Addr = 0x22CA
+
+[XTR11]
+AddrSpace=0xFF
+Addr = 0x22CB
+
+[XTR12]
+AddrSpace=0xFF
+Addr = 0x22CC
+
+[XTR13]
+AddrSpace=0xFF
+Addr = 0x22CD
+
+[XTR14]
+AddrSpace=0xFF
+Addr = 0x22CE
+
+[XTR15]
+AddrSpace=0xFF
+Addr = 0x22CF
+
+[XTR16]
+AddrSpace=0xFF
+Addr = 0x22D0
+
+[XTR17]
+AddrSpace=0xFF
+Addr = 0x22D1
+
+[XTR18]
+AddrSpace=0xFF
+Addr = 0x22D2
+
+[XTR19]
+AddrSpace=0xFF
+Addr = 0x22D3
+
+[XTR20]
+AddrSpace=0xFF
+Addr = 0x22D4
+
+[XTR21]
+AddrSpace=0xFF
+Addr = 0x22D5
+
+[XTR22]
+AddrSpace=0xFF
+Addr = 0x22D6
+
+[XTR23]
+AddrSpace=0xFF
+Addr = 0x22D7
+
+[XTR24]
+AddrSpace=0xFF
+Addr = 0x22D8
+
+[XTR25]
+AddrSpace=0xFF
+Addr = 0x22D9
+
+[XTR26]
+AddrSpace=0xFF
+Addr = 0x22DA
+
+[XTR27]
+AddrSpace=0xFF
+Addr = 0x22DB
+
+[XTR28]
+AddrSpace=0xFF
+Addr = 0x22DC
+
+[XTR29]
+AddrSpace=0xFF
+Addr = 0x22DD
+
+[XTR30]
+AddrSpace=0xFF
+Addr = 0x22DE
+
+[XTR31]
+AddrSpace=0xFF
+Addr = 0x22DF
+
+[XTHR0]
+AddrSpace=0xFF
+Addr = 0x22E0
+
+[XTHR1]
+AddrSpace=0xFF
+Addr = 0x22E1
+
+[XTHR2]
+AddrSpace=0xFF
+Addr = 0x22E2
+
+[XTHR3]
+AddrSpace=0xFF
+Addr = 0x22E3
+
+[XCMCTL]
+AddrSpace=0xFF
+Addr = 0x22FF
+
+;--- Compute Block Y Non-Memory-Mapped Register Group ---
+[YSTAT]
+AddrSpace=0xFF
+Addr = 0x243F
+
+[YPR]
+AddrSpace=0xFF
+Addr = 0x2460
+Size=2
+[[YPR0]]
+[[YPR1]]
+
+[YMR0]
+AddrSpace=0xFF
+Addr = 0x2480
+
+[YMR1]
+AddrSpace=0xFF
+Addr = 0x2481
+
+[YMR2]
+AddrSpace=0xFF
+Addr = 0x2482
+
+[YMR3]
+AddrSpace=0xFF
+Addr = 0x2483
+
+[YMR4]
+AddrSpace=0xFF
+Addr = 0x2484
+
+[YBFOTMP]
+AddrSpace=0xFF
+Addr = 0x24A0
+Size=2
+[[YBFOTMP0]]
+[[YBFOTMP1]]
+
+[YTR0]
+AddrSpace=0xFF
+Addr = 0x24C0
+
+[YTR1]
+AddrSpace=0xFF
+Addr = 0x24C1
+
+[YTR2]
+AddrSpace=0xFF
+Addr = 0x24C2
+
+[YTR3]
+AddrSpace=0xFF
+Addr = 0x24C3
+
+[YTR4]
+AddrSpace=0xFF
+Addr = 0x24C4
+
+[YTR5]
+AddrSpace=0xFF
+Addr = 0x24C5
+
+[YTR6]
+AddrSpace=0xFF
+Addr = 0x24C6
+
+[YTR7]
+AddrSpace=0xFF
+Addr = 0x24C7
+
+[YTR8]
+AddrSpace=0xFF
+Addr = 0x24C8
+
+[YTR9]
+AddrSpace=0xFF
+Addr = 0x24C9
+
+[YTR10]
+AddrSpace=0xFF
+Addr = 0x24CA
+
+[YTR11]
+AddrSpace=0xFF
+Addr = 0x24CB
+
+[YTR12]
+AddrSpace=0xFF
+Addr = 0x24CC
+
+[YTR13]
+AddrSpace=0xFF
+Addr = 0x24CD
+
+[YTR14]
+AddrSpace=0xFF
+Addr = 0x24CE
+
+[YTR15]
+AddrSpace=0xFF
+Addr = 0x24CF
+
+[YTR16]
+AddrSpace=0xFF
+Addr = 0x24D0
+
+[YTR17]
+AddrSpace=0xFF
+Addr = 0x24D1
+
+[YTR18]
+AddrSpace=0xFF
+Addr = 0x24D2
+
+[YTR19]
+AddrSpace=0xFF
+Addr = 0x24D3
+
+[YTR20]
+AddrSpace=0xFF
+Addr = 0x24D4
+
+[YTR21]
+AddrSpace=0xFF
+Addr = 0x24D5
+
+[YTR22]
+AddrSpace=0xFF
+Addr = 0x24D6
+
+[YTR23]
+AddrSpace=0xFF
+Addr = 0x24D7
+
+[YTR24]
+AddrSpace=0xFF
+Addr = 0x24D8
+
+[YTR25]
+AddrSpace=0xFF
+Addr = 0x24D9
+
+[YTR26]
+AddrSpace=0xFF
+Addr = 0x24DA
+
+[YTR27]
+AddrSpace=0xFF
+Addr = 0x24DB
+
+[YTR28]
+AddrSpace=0xFF
+Addr = 0x24DC
+
+[YTR29]
+AddrSpace=0xFF
+Addr = 0x24DD
+
+[YTR30]
+AddrSpace=0xFF
+Addr = 0x24DE
+
+[YTR31]
+AddrSpace=0xFF
+Addr = 0x24DF
+
+[YTHR0]
+AddrSpace=0xFF
+Addr = 0x24E0
+
+[YTHR1]
+AddrSpace=0xFF
+Addr = 0x24E1
+
+[YTHR2]
+AddrSpace=0xFF
+Addr = 0x24E2
+
+[YTHR3]
+AddrSpace=0xFF
+Addr = 0x24E3
+
+[YCMCTL]
+AddrSpace=0xFF
+Addr = 0x24FF
+
+;--- J-IALU Register Group ---
+[J0]
+Addr = 0x1E0180
+Size = 1
+
+[J1]
+Addr = 0x1E0181
+Size = 1
+
+[J2]
+Addr = 0x1E0182
+Size = 1
+
+[J3]
+Addr = 0x1E0183
+Size = 1
+
+[J4]
+Addr = 0x1E0184
+Size = 1
+
+[J5]
+Addr = 0x1E0185
+Size = 1
+
+[J6]
+Addr = 0x1E0186
+Size = 1
+
+[J7]
+Addr = 0x1E0187
+Size = 1
+
+[J8]
+Addr = 0x1E0188
+Size = 1
+
+[J9]
+Addr = 0x1E0189
+Size = 1
+
+[J10]
+Addr = 0x1E018A
+Size = 1
+
+[J11]
+Addr = 0x1E018B
+Size = 1
+
+[J12]
+Addr = 0x1E018C
+Size = 1
+
+[J13]
+Addr = 0x1E018D
+Size = 1
+
+[J14]
+Addr = 0x1E018E
+Size = 1
+
+[J15]
+Addr = 0x1E018F
+Size = 1
+
+[J16]
+Addr = 0x1E0190
+Size = 1
+
+[J17]
+Addr = 0x1E0191
+Size = 1
+
+[J18]
+Addr = 0x1E0192
+Size = 1
+
+[J19]
+Addr = 0x1E0193
+Size = 1
+
+[J20]
+Addr = 0x1E0194
+Size = 1
+
+[J21]
+Addr = 0x1E0195
+Size = 1
+
+[J22]
+Addr = 0x1E0196
+Size = 1
+
+[J23]
+Addr = 0x1E0197
+Size = 1
+
+[J24]
+Addr = 0x1E0198
+Size = 1
+
+[J25]
+Addr = 0x1E0199
+Size = 1
+
+[J26]
+Addr = 0x1E019A
+Size = 1
+
+[J27]
+Addr = 0x1E019B
+Size = 1
+
+[J28]
+Addr = 0x1E019C
+Size = 1
+
+[J29]
+Addr = 0x1E019D
+Size = 1
+
+[J30]
+Addr = 0x1E019E
+Size = 1
+
+[J31]
+Addr = 0x1E019F
+Size = 1
+
+;--- K-IALU Register Group ---
+[K0]
+Addr = 0x1E01A0
+Size = 1
+
+[K1]
+Addr = 0x1E01A1
+Size = 1
+
+[K2]
+Addr = 0x1E01A2
+Size = 1
+
+[K3]
+Addr = 0x1E01A3
+Size = 1
+
+[K4]
+Addr = 0x1E01A4
+Size = 1
+
+[K5]
+Addr = 0x1E01A5
+Size = 1
+
+[K6]
+Addr = 0x1E01A6
+Size = 1
+
+[K7]
+Addr = 0x1E01A7
+Size = 1
+
+[K8]
+Addr = 0x1E01A8
+Size = 1
+
+[K9]
+Addr = 0x1E01A9
+Size = 1
+
+[K10]
+Addr = 0x1E01AA
+Size = 1
+
+[K11]
+Addr = 0x1E01AB
+Size = 1
+
+[K12]
+Addr = 0x1E01AC
+Size = 1
+
+[K13]
+Addr = 0x1E01AD
+Size = 1
+
+[K14]
+Addr = 0x1E01AE
+Size = 1
+
+[K15]
+Addr = 0x1E01AF
+Size = 1
+
+[K16]
+Addr = 0x1E01B0
+Size = 1
+
+[K17]
+Addr = 0x1E01B1
+Size = 1
+
+[K18]
+Addr = 0x1E01B2
+Size = 1
+
+[K19]
+Addr = 0x1E01B3
+Size = 1
+
+[K20]
+Addr = 0x1E01B4
+Size = 1
+
+[K21]
+Addr = 0x1E01B5
+Size = 1
+
+[K22]
+Addr = 0x1E01B6
+Size = 1
+
+[K23]
+Addr = 0x1E01B7
+Size = 1
+
+[K24]
+Addr = 0x1E01B8
+Size = 1
+
+[K25]
+Addr = 0x1E01B9
+Size = 1
+
+[K26]
+Addr = 0x1E01BA
+Size = 1
+
+[K27]
+Addr = 0x1E01BB
+Size = 1
+
+[K28]
+Addr = 0x1E01BC
+Size = 1
+
+[K29]
+Addr = 0x1E01BD
+Size = 1
+
+[K30]
+Addr = 0x1E01BE
+Size = 1
+
+[K31]
+Addr = 0x1E01BF
+Size = 1
+
+;--- J-IALU Circular Buffer Register Group ---
+[JB0]
+Addr = 0x1E01C0
+Size = 1
+
+[JB1]
+Addr = 0x1E01C1
+Size = 1
+
+[JB2]
+Addr = 0x1E01C2
+Size = 1
+
+[JB3]
+Addr = 0x1E01C3
+Size = 1
+
+[JL0]
+Addr = 0x1E01C4
+Size = 1
+
+[JL1]
+Addr = 0x1E01C5
+Size = 1
+
+[JL2]
+Addr = 0x1E01C6
+Size = 1
+
+[JL3]
+Addr = 0x1E01C7
+Size = 1
+
+[JUSP]
+Addr = 0x1E01DB
+Size = 1
+
+;--- K-IALU Circular Buffer Register Group ---
+[KB0]
+Addr = 0x1E01E0
+Size = 1
+
+[KB1]
+Addr = 0x1E01E1
+Size = 1
+
+[KB2]
+Addr = 0x1E01E2
+Size = 1
+
+[KB3]
+Addr = 0x1E01E3
+Size = 1
+
+[KL0]
+Addr = 0x1E01E4
+Size = 1
+
+[KL1]
+Addr = 0x1E01E5
+Size = 1
+
+[KL2]
+Addr = 0x1E01E6
+Size = 1
+
+[KL3]
+Addr = 0x1E01E7
+Size = 1
+
+[KUSP]
+Addr = 0x1E01FB
+Size = 1
+
+;--- Sequencer Register Group ---
+[CJMP]
+Addr = 0x1E0340
+Size = 1
+
+[RETI]
+Addr = 0x1E0342
+Size = 1
+
+[RETIB]
+Addr = 0x1E0343
+Size = 1
+
+[RETS]
+Addr = 0x1E0344
+Size = 1
+
+[DBGE]
+Addr = 0x1E0345
+Size = 1
+
+[LC0]
+Addr = 0x1E0348
+Size = 1
+
+[LC1]
+Addr = 0x1E0349
+Size = 1
+
+[IVSW]
+Addr = 0x1E0350
+Size = 1
+
+[FLAGREG]
+Addr = 0x1E0354
+Size = 1
+
+[FLAGREGST]
+Addr = 0x1E0355
+Size = 1
+
+[FLAGREGCL]
+Addr = 0x1E0356
+Size = 1
+
+[SQCTL]
+Addr = 0x1E0358
+Size = 1
+
+[SQCTLST]
+Addr = 0x1E0359
+Size = 1
+
+[SQCTLCL]
+Addr = 0x1E035A
+Size = 1
+
+[SQSTAT]
+Addr = 0x1E035B
+Size = 1
+Access = 1
+[[BTBLK]]
+bitOffset=29
+bitSize=1
+[[BTBEN]]
+bitOffset=28
+bitSize=1
+[[BTBMOD]]
+bitOffset=24
+bitSize=2
+[[EMUL]]
+bitOffset=22
+bitSize=1
+[[SW]]
+bitOffset=21
+bitSize=1
+[[GIE]]
+bitOffset=20
+bitSize=1
+[[FLAG3]]
+bitOffset=19
+bitSize=1
+[[FLAG2]]
+bitOffset=18
+bitSize=1
+[[FLAG1]]
+bitOffset=17
+bitSize=1
+[[FLAG0]]
+bitOffset=16
+bitSize=1
+[[EMCAUSE]]
+bitOffset=12
+bitSize=4
+[[EXCAUSE]]
+bitOffset=8
+bitSize=4
+[[SPVCMD]]
+bitOffset=3
+bitSize=5
+[[IDLE]]
+bitOffset=2
+bitSize=1
+[[MODE]]
+bitOffset=0
+bitSize=2
+
+[SFREG]
+Addr = 0x1E035C
+Size = 1
+
+[EXT_FUN]
+Addr = 0x1E035E
+Size = 1
+
+;--- Interrupt Vector Table Register Group A ---
+[IVKERNEL]
+AddrSpace = 2
+Addr = 0x80000300
+Size = 1
+
+[IVGPIO]
+AddrSpace = 2
+Addr = 0x80000301
+Size = 1
+
+[IVTIMER0LP]
+AddrSpace = 2
+Addr = 0x80000302
+Size = 1
+
+[IVTIMER1LP]
+AddrSpace = 2
+Addr = 0x80000303
+Size = 1
+
+[IVUART0]
+AddrSpace = 2
+Addr = 0x80000304
+Size = 1
+
+[IVUART1]
+AddrSpace = 2
+Addr = 0x80000305
+Size = 1
+
+[IVLINK0]
+AddrSpace = 2
+Addr = 0x80000306
+Size = 1
+
+[IVLINK1]
+AddrSpace = 2
+Addr = 0x80000307
+Size = 1
+
+[IVNANDC]
+AddrSpace = 2
+Addr = 0x8000030a
+Size = 1
+
+[IVMIL0]
+AddrSpace = 2
+Addr = 0x8000030b
+Size = 1
+
+[IVMIL1]
+AddrSpace = 2
+Addr = 0x8000030c
+Size = 1
+
+[IVDIGC]
+AddrSpace = 2
+Addr = 0x8000030d
+Size = 1
+
+[IVDMA0]
+AddrSpace = 2
+Addr = 0x8000030e
+Size = 1
+
+[IVDMA1]
+AddrSpace = 2
+Addr = 0x8000030f
+Size = 1
+
+[IVDMA2]
+AddrSpace = 2
+Addr = 0x80000310
+Size = 1
+
+[IVDMA3]
+AddrSpace = 2
+Addr = 0x80000311
+Size = 1
+
+[IVARINC_RX]
+AddrSpace = 2
+Addr = 0x80000312
+Size = 1
+
+[IVARINC_TX]
+AddrSpace = 2
+Addr = 0x80000313
+Size = 1
+
+[IVSPI1]
+AddrSpace = 2
+Addr = 0x80000314
+Size = 1
+
+[IVSPI2]
+AddrSpace = 2
+Addr = 0x80000315
+Size = 1
+
+[IVDMA4]
+AddrSpace = 2
+Addr = 0x80000316
+Size = 1
+
+[IVDMA5]
+AddrSpace = 2
+Addr = 0x80000317
+Size = 1
+
+[IVDMA6]
+AddrSpace = 2
+Addr = 0x80000318
+Size = 1
+
+[IVDMA7]
+AddrSpace = 2
+Addr = 0x80000319
+Size = 1
+
+[IVI2C]
+AddrSpace = 2
+Addr = 0x8000031a
+Size = 1
+
+[IVGTMR0]
+AddrSpace = 2
+Addr = 0x8000031b
+Size = 1
+
+[IVGTMR1]
+AddrSpace = 2
+Addr = 0x8000031c
+Size = 1
+
+[IVDMA8]
+AddrSpace = 2
+Addr = 0x8000031d
+Size = 1
+
+[IVDMA9]
+AddrSpace = 2
+Addr = 0x8000031e
+Size = 1
+
+[IVDMA10]
+AddrSpace = 2
+Addr = 0x8000031f
+Size = 1
+
+;--- Interrupt Vector Table Register Group B ---
+[IVDMA11]
+AddrSpace = 2
+Addr = 0x80000320
+Size = 1
+
+[IVADDA0]
+AddrSpace = 2
+Addr = 0x80000321
+Size = 1
+
+[IVADDA1]
+AddrSpace = 2
+Addr = 0x80000322
+Size = 1
+
+[IVADDA2]
+AddrSpace = 2
+Addr = 0x80000323
+Size = 1
+
+[IVADDA3]
+AddrSpace = 2
+Addr = 0x80000324
+Size = 1
+
+[IVDMA12]
+AddrSpace = 2
+Addr = 0x80000325
+Size = 1
+
+[IVHOST]
+AddrSpace = 2
+Addr = 0x80000326
+Size = 1
+
+[IVLCD]
+AddrSpace = 2
+Addr = 0x80000327
+Size = 1
+
+[IVIRQ0]
+AddrSpace = 2
+Addr = 0x80000329
+Size = 1
+
+[IVIRQ1]
+AddrSpace = 2
+Addr = 0x8000032a
+Size = 1
+
+[IVIRQ2]
+AddrSpace = 2
+Addr = 0x8000032b
+Size = 1
+
+[IVIRQ3]
+AddrSpace = 2
+Addr = 0x8000032c
+Size = 1
+
+[IVSPI0]
+AddrSpace = 2
+Addr = 0x8000032d
+Size = 1
+
+[IVSSI0]
+AddrSpace = 2
+Addr = 0x8000032e
+Size = 1
+
+[IVSSI1]
+AddrSpace = 2
+Addr = 0x8000032f
+Size = 1
+
+[VIRPT]
+AddrSpace = 2
+Addr = 0x80000330
+Size = 1
+
+[IVVCAM]
+AddrSpace = 2
+Addr = 0x80000331
+Size = 1
+
+[IVBUSLK]
+AddrSpace = 2
+Addr = 0x80000332
+Size = 1
+
+[IVH264]
+AddrSpace = 2
+Addr = 0x80000333
+Size = 1
+
+[IVTIMER0HP]
+AddrSpace = 2
+Addr = 0x80000334
+Size = 1
+
+[IVTIMER1HP]
+AddrSpace = 2
+Addr = 0x80000335
+Size = 1
+
+[IVALARM]
+AddrSpace = 2
+Addr = 0x80000336
+Size = 1
+
+[IVTIC]
+AddrSpace = 2
+Addr = 0x80000337
+Size = 1
+
+[IVDOG]
+AddrSpace = 2
+Addr = 0x80000338
+Size = 1
+
+[IVHW]
+AddrSpace = 2
+Addr = 0x80000339
+Size = 1
+
+;--- Interrupt Control Register Group ---
+[ILATL]
+AddrSpace = 2
+Addr = 0x80000330
+Size = 1
+Access = 1
+[[INT_DMA10]]
+bitOffset=31
+bitSize=1
+[[INT_DMA9]]
+bitOffset=30
+bitSize=1
+[[INT_DMA8]]
+bitOffset=29
+bitSize=1
+[[INT_DMA7]]
+bitOffset=25
+bitSize=1
+[[INT_DMA6]]
+bitOffset=24
+bitSize=1
+[[INT_DMA5]]
+bitOffset=23
+bitSize=1
+[[INT_DMA4]]
+bitOffset=22
+bitSize=1
+[[INT_DMA3]]
+bitOffset=17
+bitSize=1
+[[INT_DMA2]]
+bitOffset=16
+bitSize=1
+[[INT_DMA1]]
+bitOffset=15
+bitSize=1
+[[INT_DMA0]]
+bitOffset=14
+bitSize=1
+[[INT_LINK3]]
+bitOffset=9
+bitSize=1
+[[INT_LINK2]]
+bitOffset=8
+bitSize=1
+[[INT_LINK1]]
+bitOffset=7
+bitSize=1
+[[INT_LINK0]]
+bitOffset=6
+bitSize=1
+[[INT_TIMER1LP]]
+bitOffset=3
+bitSize=1
+[[INT_TIMER0LP]]
+bitOffset=2
+bitSize=1
+[[INT_KERNEL]]
+bitOffset=0
+bitSize=1
+
+[ILATH]
+AddrSpace = 2
+Addr = 0x80000341
+Size = 1
+Access = 1
+[[INT_DMA11]]
+bitOffset=0
+bitSize=1
+[[INT_DMA12]]
+bitOffset=5
+bitSize=1
+[[INT_DMA13]]
+bitOffset=6
+bitSize=1
+[[INT_IRQ0]]
+bitOffset=9
+bitSize=1
+[[INT_IRQ1]]
+bitOffset=10
+bitSize=1
+[[INT_IRQ2]]
+bitOffset=11
+bitSize=1
+[[INT_IRQ3]]
+bitOffset=12
+bitSize=1
+[[INT_VIRPT]]
+bitOffset=16
+bitSize=1
+[[INT_BUSLOCK]]
+bitOffset=18
+bitSize=1
+[[INT_TIMER0HP]]
+bitOffset=20
+bitSize=1
+[[INT_TIMER1HP]]
+bitOffset=21
+bitSize=1
+[[INT_HWERR]]
+bitOffset=25
+bitSize=1
+
+[ILATSTL]
+AddrSpace = 2
+Addr = 0x80000342
+Size = 1
+Access = 2
+
+[ILATSTH]
+AddrSpace = 2
+Addr = 0x80000343
+Size = 1
+Access = 2
+
+[ILATCLL]
+AddrSpace = 2
+Addr = 0x80000344
+Size = 1
+Access = 2
+
+[ILATCLH]
+AddrSpace = 2
+Addr = 0x80000345
+Size = 1
+Access = 2
+
+[PMASKL]
+AddrSpace = 2
+Addr = 0x80000346
+Size = 1
+Access = 1
+
+[PMASKH]
+AddrSpace = 2
+Addr = 0x80000347
+Size = 1
+Access = 1
+
+[IMASKL]
+AddrSpace = 2
+Addr = 0x80000348
+Size = 1
+[[INT_DMA10]]
+bitOffset=31
+bitSize=1
+[[INT_DMA9]]
+bitOffset=30
+bitSize=1
+[[INT_DMA8]]
+bitOffset=29
+bitSize=1
+[[INT_DMA7]]
+bitOffset=25
+bitSize=1
+[[INT_DMA6]]
+bitOffset=24
+bitSize=1
+[[INT_DMA5]]
+bitOffset=23
+bitSize=1
+[[INT_DMA4]]
+bitOffset=22
+bitSize=1
+[[INT_DMA3]]
+bitOffset=17
+bitSize=1
+[[INT_DMA2]]
+bitOffset=16
+bitSize=1
+[[INT_DMA1]]
+bitOffset=15
+bitSize=1
+[[INT_DMA0]]
+bitOffset=14
+bitSize=1
+[[INT_LINK3]]
+bitOffset=9
+bitSize=1
+[[INT_LINK2]]
+bitOffset=8
+bitSize=1
+[[INT_LINK1]]
+bitOffset=7
+bitSize=1
+[[INT_LINK0]]
+bitOffset=6
+bitSize=1
+[[INT_TIMER1LP]]
+bitOffset=3
+bitSize=1
+[[INT_TIMER0LP]]
+bitOffset=2
+bitSize=1
+[[INT_KERNEL]]
+bitOffset=0
+bitSize=1
+
+[IMASKH]
+AddrSpace = 2
+Addr = 0x80000349
+Size = 1
+[[INT_DMA11]]
+bitOffset=0
+bitSize=1
+[[INT_DMA12]]
+bitOffset=5
+bitSize=1
+[[INT_DMA13]]
+bitOffset=6
+bitSize=1
+[[INT_IRQ0]]
+bitOffset=9
+bitSize=1
+[[INT_IRQ1]]
+bitOffset=10
+bitSize=1
+[[INT_IRQ2]]
+bitOffset=11
+bitSize=1
+[[INT_IRQ3]]
+bitOffset=12
+bitSize=1
+[[INT_VIRPT]]
+bitOffset=16
+bitSize=1
+[[INT_BUSLOCK]]
+bitOffset=18
+bitSize=1
+[[INT_TIMER0HP]]
+bitOffset=20
+bitSize=1
+[[INT_TIMER1HP]]
+bitOffset=21
+bitSize=1
+[[INT_HWERR]]
+bitOffset=25
+bitSize=1
+
+[INTCTL]
+AddrSpace = 2
+Addr = 0x8000034e
+Size = 1
+
+;--- DMA Control Register Group ---
+[DCNT]
+AddrSpace = 2
+Addr = 0x80000060
+Size = 1
+
+[DCNTST]
+AddrSpace = 2
+Addr = 0x80000064
+Size = 1
+Access = 2
+
+[DCNTCL]
+AddrSpace = 2
+Addr = 0x80000068
+Size = 1
+Access = 2
+
+[DSTAT]
+AddrSpace = 2
+Addr = 0x8000006c
+Size = 2
+Access = 1
+[[DSTATL]]
+[[DSTATH]]
+
+[DSTATCL]
+AddrSpace = 2
+Addr = 0x80000070
+Size = 2
+Access = 1
+[[DSTATCLL]]
+[[DSTATCLH]]
+
+[DMACFGL]
+AddrSpace = 2
+Addr = 0x80000078
+Size = 1
+
+[DMACFGH]
+AddrSpace = 2
+Addr = 0x80000079
+Size = 1
+
+;--- DMA TCB 0-3 Register Group ---
+[DCS0]
+AddrSpace = 2
+Addr = 0x80000000
+Size = 4
+[[DCS0_DI]]
+[[DCS0_DX]]
+[[DCS0_DY]]
+[[DCS0_DP]]
+
+[DCD0]
+AddrSpace = 2
+Addr = 0x80000004
+Size = 4
+[[DCD0_DI]]
+[[DCD0_DX]]
+[[DCD0_DY]]
+[[DCD0_DP]]
+
+[DCS1]
+AddrSpace = 2
+Addr = 0x80000008
+Size = 4
+[[DCS1_DI]]
+[[DCS1_DX]]
+[[DCS1_DY]]
+[[DCS1_DP]]
+
+[DCD1]
+AddrSpace = 2
+Addr = 0x8000000c
+Size = 4
+[[DCD1_DI]]
+[[DCD1_DX]]
+[[DCD1_DY]]
+[[DCD1_DP]]
+
+[DCS2]
+AddrSpace = 2
+Addr = 0x80000010
+Size = 4
+[[DCS2_DI]]
+[[DCS2_DX]]
+[[DCS2_DY]]
+[[DCS2_DP]]
+
+[DCD2]
+AddrSpace = 2
+Addr = 0x80000014
+Size = 4
+[[DCD2_DI]]
+[[DCD2_DX]]
+[[DCD2_DY]]
+[[DCD2_DP]]
+
+[DCS3]
+AddrSpace = 2
+Addr = 0x80000018
+Size = 4
+[[DCS3_DI]]
+[[DCS3_DX]]
+[[DCS3_DY]]
+[[DCS3_DP]]
+
+[DCD3]
+AddrSpace = 2
+Addr = 0x8000001c
+Size = 4
+[[DCD3_DI]]
+[[DCD3_DX]]
+[[DCD3_DY]]
+[[DCD3_DP]]
+
+;--- DMA TCB 4-7 Register Group ---
+[DC4]
+AddrSpace = 2
+Addr = 0x80000020
+Size = 4
+[[DC4_DI]]
+[[DC4_DX]]
+[[DC4_DY]]
+[[DC4_DP]]
+
+[DC5]
+AddrSpace = 2
+Addr = 0x80000024
+Size = 4
+[[DC5_DI]]
+[[DC5_DX]]
+[[DC5_DY]]
+[[DC5_DP]]
+
+[DC6]
+AddrSpace = 2
+Addr = 0x80000028
+Size = 4
+[[DC6_DI]]
+[[DC6_DX]]
+[[DC6_DY]]
+[[DC6_DP]]
+
+[DC7]
+AddrSpace = 2
+Addr = 0x8000002c
+Size = 4
+[[DC7_DI]]
+[[DC7_DX]]
+[[DC7_DY]]
+[[DC7_DP]]
+
+[DCA4]
+AddrSpace = 2
+Addr = 0x80000030
+Size = 2
+[[DCA4_DI]]
+[[DCA4_DP]]
+
+[DCA5]
+AddrSpace = 2
+Addr = 0x80000032
+Size = 2
+[[DCA5_DI]]
+[[DCA5_DP]]
+
+[DCA6]
+AddrSpace = 2
+Addr = 0x80000034
+Size = 2
+[[DCA6_DI]]
+[[DCA6_DP]]
+
+[DCA7]
+AddrSpace = 2
+Addr = 0x80000036
+Size = 2
+[[DCA7_DI]]
+[[DCA7_DP]]
+
+
+;--- DMA TCB 8-11 Register Group ---
+[DC8]
+AddrSpace = 2
+Addr = 0x80000040
+Size = 4
+[[DC8_DI]]
+[[DC8_DX]]
+[[DC8_DY]]
+[[DC8_DP]]
+
+[DC9]
+AddrSpace = 2
+Addr = 0x80000044
+Size = 4
+[[DC9_DI]]
+[[DC9_DX]]
+[[DC9_DY]]
+[[DC9_DP]]
+
+[DC10]
+AddrSpace = 2
+Addr = 0x80000048
+Size = 4
+[[DC10_DI]]
+[[DC10_DX]]
+[[DC10_DY]]
+[[DC10_DP]]
+
+[DC11]
+AddrSpace = 2
+Addr = 0x8000004c
+Size = 4
+[[DC11_DI]]
+[[DC11_DX]]
+[[DC11_DY]]
+[[DC11_DP]]
+
+[DCA8]
+AddrSpace = 2
+Addr = 0x80000050
+Size = 2
+[[DCA8_DI]]
+[[DCA8_DP]]
+
+[DCA9]
+AddrSpace = 2
+Addr = 0x80000052
+Size = 2
+[[DCA9_DI]]
+[[DCA9_DP]]
+
+[DCA10]
+AddrSpace = 2
+Addr = 0x80000054
+Size = 2
+[[DCA10_DI]]
+[[DCA10_DP]]
+
+[DCA11]
+AddrSpace = 2
+Addr = 0x80000056
+Size = 2
+[[DCA11_DI]]
+[[DCA11_DP]]
+
+;--- DMA TCB 12-13 (AutoDMA) Register Group ---
+
+[DC12]
+AddrSpace = 2
+Addr = 0x80000058
+Size = 4
+[[DC12_DI]]
+[[DC12_DX]]
+[[DC12_DY]]
+[[DC12_DP]]
+
+[MCR]
+AddrSpace = 2
+Addr = 0x8000005c
+Size = 4
+Access = 1
+[[RESERVED0]]
+[[RESERVED1]]
+[[MCR]]
+[[RESERVED2]]
+
+;--- AUTO DMA Register Group ---
+[AUTODMA0]
+AddrSpace = 2
+Addr = 0x800003e0
+Size = 4
+Access = 2
+[[AUTODMA0_0]]
+[[AUTODMA0_1]]
+[[AUTODMA0_2]]
+[[AUTODMA0_3]]
+
+;--- Link Port Receive/Transmit Buffer Register Group ---
+
+[LBUFTX0]
+AddrSpace = 2
+Addr = 0x800000a0
+Size = 4
+[[LBUFTX0_0]]
+[[LBUFTX0_1]]
+[[LBUFTX0_2]]
+[[LBUFTX0_3]]
+
+[LBUFRX0]
+AddrSpace = 2
+Addr = 0x800000a4
+Size = 4
+Access = 1
+[[LBUFRX0_0]]
+[[LBUFRX0_1]]
+[[LBUFRX0_2]]
+[[LBUFRX0_3]]
+
+[LBUFTX1]
+AddrSpace = 2
+Addr = 0x800000a8
+Size = 4
+[[LBUFTX1_0]]
+[[LBUFTX1_1]]
+[[LBUFTX1_2]]
+[[LBUFTX1_3]]
+
+[LBUFRX1]
+AddrSpace = 2
+Addr = 0x800000ac
+Size = 4
+Access = 1
+[[LBUFRX1_0]]
+[[LBUFRX1_1]]
+[[LBUFRX1_2]]
+[[LBUFRX1_3]]
+
+
+;--- Link Control and Status Register Group ---
+
+[LRCTL0]
+AddrSpace = 2
+Addr = 0x800000e0
+Size = 1
+
+[LRCTL1]
+AddrSpace = 2
+Addr = 0x800000e1
+Size = 1
+
+[LTCTL0]
+AddrSpace = 2
+Addr = 0x800000e4
+Size = 1
+
+[LTCTL1]
+AddrSpace = 2
+Addr = 0x800000e5
+Size = 1
+
+[LRDLY0]
+AddrSpace = 2
+Addr = 0x800000ec
+Size = 1
+
+[LRDLY1]
+AddrSpace = 2
+Addr = 0x800000ed
+Size = 1
+
+[LRSTAT0]
+AddrSpace = 2
+Addr = 0x800000f0
+Size = 1
+Access = 1
+
+[LRSTAT1]
+AddrSpace = 2
+Addr = 0x800000f1
+Size = 1
+Access = 1
+
+[LTSTAT0]
+AddrSpace = 2
+Addr = 0x800000f4
+Size = 1
+Access = 1
+
+[LTSTAT1]
+AddrSpace = 2
+Addr = 0x800000f5
+Size = 1
+Access = 1
+
+[LRSTATC0]
+AddrSpace = 2
+Addr = 0x800000f8
+Size = 1
+Access = 1
+
+[LRSTATC1]
+AddrSpace = 2
+Addr = 0x800000f9
+Size = 1
+Access = 1
+
+[LTSTATC0]
+AddrSpace = 2
+Addr = 0x800000fa
+Size = 1
+Access = 1
+
+[LTSTATC1]
+AddrSpace = 2
+Addr = 0x800000fb
+Size = 1
+Access = 1
+
+
+;--- Bus Interface Unit Register Group ---
+[SYSCON]
+AddrSpace = 2
+Addr = 0x80000080
+Size = 1
+
+[BUSLOCK]
+AddrSpace = 2
+Addr = 0x80000083
+Size = 1
+
+[SDRCON]
+AddrSpace = 2
+Addr = 0x80000084
+Size = 1
+
+[SDRSRF]
+AddrSpace = 2
+Addr = 0x80000085
+Size = 1
+
+[SYSTAT]
+AddrSpace = 2
+Addr = 0x80000086
+Size = 1
+Access = 1
+
+[SYSTATCL]
+AddrSpace = 2
+Addr = 0x80000087
+Size = 1
+Access = 1
+
+[SD_REF]
+AddrSpace = 2
+Addr = 0x8000009c
+Size = 1
+
+
+;--- UART Units Register Groups ---
+
+[UART0.UARTDR]
+AddrSpace = 2
+Addr = 0x80000100
+Size = 1
+
+[UART0.URXSTAT]
+AddrSpace = 2
+Addr = 0x80000101
+Size = 1
+
+[UART0.UCR_load]
+AddrSpace = 2
+Addr = 0x80000102
+Size = 1
+
+[UART0.UCR_set]
+AddrSpace = 2
+Addr = 0x80000103
+Size = 1
+
+[UART0.UCR_clear]
+AddrSpace = 2
+Addr = 0x80000104
+Size = 1
+
+[UART0.UBitRate]
+AddrSpace = 2
+Addr = 0x80000105
+Size = 1
+
+[UART0.UFLAG]
+AddrSpace = 2
+Addr = 0x80000106
+Size = 1
+
+[UART0.UINTM]
+AddrSpace = 2
+Addr = 0x80000107
+Size = 1
+
+[UART0.UINT]
+AddrSpace = 2
+Addr = 0x80000108
+Size = 1
+
+[UART1.UARTDR]
+AddrSpace = 2
+Addr = 0x80000120
+Size = 1
+
+[UART1.URXSTAT]
+AddrSpace = 2
+Addr = 0x80000121
+Size = 1
+
+[UART1.UCR_load]
+AddrSpace = 2
+Addr = 0x80000122
+Size = 1
+
+[UART1.UCR_set]
+AddrSpace = 2
+Addr = 0x80000123
+Size = 1
+
+[UART1.UCR_clear]
+AddrSpace = 2
+Addr = 0x80000124
+Size = 1
+
+[UART1.UBitRate]
+AddrSpace = 2
+Addr = 0x80000125
+Size = 1
+
+[UART1.UFLAG]
+AddrSpace = 2
+Addr = 0x80000126
+Size = 1
+
+[UART1.UINTM]
+AddrSpace = 2
+Addr = 0x80000127
+Size = 1
+
+[UART1.UINT]
+AddrSpace = 2
+Addr = 0x80000128
+Size = 1
+
+;--- SPI Units Register Groups ---
+
+[SPI0.SPCR0]
+AddrSpace = 2
+Addr = 0x80000140
+Size = 1
+
+[SPI0.SPCR1]
+AddrSpace = 2
+Addr = 0x80000141
+Size = 1
+
+[SPI0.SPDR]
+AddrSpace = 2
+Addr = 0x80000142
+Size = 1
+
+[SPI0.SPSR]
+AddrSpace = 2
+Addr = 0x80000143
+Size = 1
+
+[SPI0.RX_CNT]
+AddrSpace = 2
+Addr = 0x80000144
+Size = 1
+
+[SPI1.SPCR0]
+AddrSpace = 2
+Addr = 0x80000360
+Size = 1
+
+[SPI1.SPCR1]
+AddrSpace = 2
+Addr = 0x80000361
+Size = 1
+
+[SPI1.SPDR]
+AddrSpace = 2
+Addr = 0x80000362
+Size = 1
+
+[SPI1.SPSR]
+AddrSpace = 2
+Addr = 0x80000363
+Size = 1
+
+[SPI1.RX_CNT]
+AddrSpace = 2
+Addr = 0x80000364
+Size = 1
+
+[SPI2.SPCR0]
+AddrSpace = 2
+Addr = 0x80000380
+Size = 1
+
+[SPI2.SPCR1]
+AddrSpace = 2
+Addr = 0x80000381
+Size = 1
+
+[SPI2.SPDR]
+AddrSpace = 2
+Addr = 0x80000382
+Size = 1
+
+[SPI2.SPSR]
+AddrSpace = 2
+Addr = 0x80000383
+Size = 1
+
+[SPI2.RX_CNT]
+AddrSpace = 2
+Addr = 0x80000384
+Size = 1
+
+;--- LCD Unit Register Group ---
+
+[LCD.CTRL]
+AddrSpace = 2
+Addr = 0x80000160
+Size = 1
+
+[LCD.STATUS]
+AddrSpace = 2
+Addr = 0x80000161
+Size = 1
+
+[LCD.HTIM]
+AddrSpace = 2
+Addr = 0x80000162
+Size = 1
+
+[LCD.VTIM]
+AddrSpace = 2
+Addr = 0x80000163
+Size = 1
+
+[LCD.HVLEN]
+AddrSpace = 2
+Addr = 0x80000164
+Size = 1
+
+[LCD.HDxTIM]
+AddrSpace = 2
+Addr = 0x80000165
+Size = 1
+
+[LCD.VDxTIM]
+AddrSpace = 2
+Addr = 0x80000166
+Size = 1
+
+[LCD.Vsize]
+AddrSpace = 2
+Addr = 0x80000167
+Size = 1
+
+[LCD.FON]
+AddrSpace = 2
+Addr = 0x80000168
+Size = 1
+
+[LCD.PXDV]
+AddrSpace = 2
+Addr = 0x80000169
+Size = 1
+
+[LCD.HDTIM]
+AddrSpace = 2
+Addr = 0x8000016a
+Size = 1
+
+[LCD.VDTIM]
+AddrSpace = 2
+Addr = 0x8000016b
+Size = 1
+
+[LCD.PANEL_CFG]
+AddrSpace = 2
+Addr = 0x8000016c
+Size = 1
+
+[LCD.PWM_CR]
+AddrSpace = 2
+Addr = 0x8000016d
+Size = 1
+
+[LCD.SLP_PERIOD]
+AddrSpace = 2
+Addr = 0x8000016e
+Size = 1
+
+[LCD.TIM_GP0]
+AddrSpace = 2
+Addr = 0x80000170
+Size = 1
+
+[LCD.TIM_GP1]
+AddrSpace = 2
+Addr = 0x80000171
+Size = 1
+
+[LCD.TIM_GP2]
+AddrSpace = 2
+Addr = 0x80000172
+Size = 1
+
+[LCD.TIM_GP3]
+AddrSpace = 2
+Addr = 0x80000173
+Size = 1
+
+[LCD.EXT_MEM_ADDR]
+AddrSpace = 2
+Addr = 0x80000174
+Size = 1
+
+;--- Video Camera Unit Register Group ---
+
+[VC_DR]
+AddrSpace = 2
+Addr = 0x800001A0
+Size = 4
+Access = 1
+
+[VC_SR]
+AddrSpace = 2
+Addr = 0x800001A4
+Size = 1
+
+[VC_CR]
+AddrSpace = 2
+Addr = 0x800001A5
+Size = 1
+
+;--- CMU Unit Register Group ---
+
+[CFG1]
+AddrSpace = 2
+Addr = 0x800001C0
+Size = 1
+
+[CFG2]
+AddrSpace = 2
+Addr = 0x800001C1
+Size = 1
+
+[CFG3]
+AddrSpace = 2
+Addr = 0x800001C2
+Size = 1
+
+[CFG4]
+AddrSpace = 2
+Addr = 0x800001C3
+Size = 1
+
+[CFG5]
+AddrSpace = 2
+Addr = 0x800001C4
+Size = 1
+
+[SYS_STS]
+AddrSpace = 2
+Addr = 0x800001C5
+Size = 1
+
+[CFG8]
+AddrSpace = 2
+Addr = 0x800001C8
+Size = 1
+
+;--- RTC Unit Register Group ---
+
+[RTC_CNT]
+AddrSpace = 2
+Addr = 0x800001E0
+Size = 1
+
+[RTC_MR]
+AddrSpace = 2
+Addr = 0x800001E1
+Size = 1
+
+[WDT_CNT]
+AddrSpace = 2
+Addr = 0x800001E2
+Size = 1
+
+[RTC_TDIV]
+AddrSpace = 2
+Addr = 0x800001E3
+Size = 1
+
+[RTC_CR]
+AddrSpace = 2
+Addr = 0x800001E4
+Size = 1
+
+[RTC_SDIV]
+AddrSpace = 2
+Addr = 0x800001E5
+Size = 1
+
+[TIC_VAL]
+AddrSpace = 2
+Addr = 0x800001E6
+Size = 1
+
+[SEC_VAL]
+AddrSpace = 2
+Addr = 0x800001E7
+Size = 1
+
+[RTC_BUSY]
+AddrSpace = 2
+Addr = 0x800001E8
+Size = 1
+
+;--- Audio AC97/I2S Units Register Groups ---
+
+[AUD0.SICR0]
+AddrSpace = 2
+Addr = 0x80000200
+Size = 1
+
+[AUD0.SINT]
+AddrSpace = 2
+Addr = 0x80000201
+Size = 1
+
+[AUD0.SICR2]
+AddrSpace = 2
+Addr = 0x80000202
+Size = 1
+
+[AUD0.SISR]
+AddrSpace = 2
+Addr = 0x80000203
+Size = 1
+
+[AUD0.SIRSR]
+AddrSpace = 2
+Addr = 0x80000204
+Size = 1
+
+[AUD0.SIIER]
+AddrSpace = 2
+Addr = 0x80000205
+Size = 1
+
+[AUD0.SIIDR]
+AddrSpace = 2
+Addr = 0x80000206
+Size = 1
+
+[AUD0.SIICR]
+AddrSpace = 2
+Addr = 0x80000207
+Size = 1
+
+[AUD0.SIADR]
+AddrSpace = 2
+Addr = 0x80000208
+Size = 1
+
+[AUD0.SIMDR]
+AddrSpace = 2
+Addr = 0x80000209
+Size = 1
+
+[AUD0.ACCAR]
+AddrSpace = 2
+Addr = 0x8000020a
+Size = 1
+
+[AUD0.ACCDR]
+AddrSpace = 2
+Addr = 0x8000020b
+Size = 1
+
+[AUD0.ACSAR]
+AddrSpace = 2
+Addr = 0x8000020c
+Size = 1
+
+[AUD0.ACSDR]
+AddrSpace = 2
+Addr = 0x8000020d
+Size = 1
+
+[AUD0.ACGDR]
+AddrSpace = 2
+Addr = 0x8000020e
+Size = 1
+
+[AUD0.ACGSR]
+AddrSpace = 2
+Addr = 0x8000020f
+Size = 1
+
+[AUD0.I2S_T_CR]
+AddrSpace = 2
+Addr = 0x80000210
+Size = 1
+
+[AUD0.I2S_R_CR]
+AddrSpace = 2
+Addr = 0x80000211
+Size = 1
+
+[AUD0.SICR3]
+AddrSpace = 2
+Addr = 0x8000021C
+Size = 1
+
+
+[AUD1.SICR0]
+AddrSpace = 2
+Addr = 0x80000220
+Size = 1
+
+[AUD1.SINT]
+AddrSpace = 2
+Addr = 0x80000221
+Size = 1
+
+[AUD1.SICR2]
+AddrSpace = 2
+Addr = 0x80000222
+Size = 1
+
+[AUD1.SISR]
+AddrSpace = 2
+Addr = 0x80000223
+Size = 1
+
+[AUD1.SIRSR]
+AddrSpace = 2
+Addr = 0x80000224
+Size = 1
+
+[AUD1.SIIER]
+AddrSpace = 2
+Addr = 0x80000225
+Size = 1
+
+[AUD1.SIIDR]
+AddrSpace = 2
+Addr = 0x80000226
+Size = 1
+
+[AUD1.SIICR]
+AddrSpace = 2
+Addr = 0x80000227
+Size = 1
+
+[AUD1.SIADR]
+AddrSpace = 2
+Addr = 0x80000228
+Size = 1
+
+[AUD1.SIMDR]
+AddrSpace = 2
+Addr = 0x80000229
+Size = 1
+
+[AUD1.ACCAR]
+AddrSpace = 2
+Addr = 0x8000022a
+Size = 1
+
+[AUD1.ACCDR]
+AddrSpace = 2
+Addr = 0x8000022b
+Size = 1
+
+[AUD1.ACSAR]
+AddrSpace = 2
+Addr = 0x8000022c
+Size = 1
+
+[AUD1.ACSDR]
+AddrSpace = 2
+Addr = 0x8000022d
+Size = 1
+
+[AUD1.ACGDR]
+AddrSpace = 2
+Addr = 0x8000022e
+Size = 1
+
+[AUD1.ACGSR]
+AddrSpace = 2
+Addr = 0x8000022f
+Size = 1
+
+[AUD1.I2S_T_CR]
+AddrSpace = 2
+Addr = 0x80000230
+Size = 1
+
+[AUD1.I2S_R_CR]
+AddrSpace = 2
+Addr = 0x80000231
+Size = 1
+
+[AUD1.SICR3]
+AddrSpace = 2
+Addr = 0x8000023C
+Size = 1
+
+;--- NAND Register Group ---
+
+[NAND.IO_CFG]
+AddrSpace = 2
+Addr = 0x80000240
+Size = 1
+
+[NAND.WCT_CFG]
+AddrSpace = 2
+Addr = 0x80000241
+Size = 1
+
+[NAND.NAND_CFG]
+AddrSpace = 2
+Addr = 0x80000242
+Size = 1
+
+[NAND.WR_CFG]
+AddrSpace = 2
+Addr = 0x80000243
+Size = 1
+
+[NAND.RD_CFG]
+AddrSpace = 2
+Addr = 0x80000244
+Size = 1
+
+[NAND.CR]
+AddrSpace = 2
+Addr = 0x80000248
+Size = 1
+
+[NAND.SR]
+AddrSpace = 2
+Addr = 0x80000249
+Size = 1
+
+[NAND.AR]
+AddrSpace = 2
+Addr = 0x8000024a
+Size = 1
+
+[NAND.CNTR]
+AddrSpace = 2
+Addr = 0x8000024b
+Size = 1
+
+[NAND.DR]
+AddrSpace = 2
+Addr = 0x8000024c
+Size = 1
+
+[NAND.ERR12]
+AddrSpace = 2
+Addr = 0x8000024d
+Size = 1
+
+[NAND.ERR34]
+AddrSpace = 2
+Addr = 0x8000024e
+Size = 1
+
+[NAND.SP_BUF]
+AddrSpace = 2
+Addr = 0x8000024f
+Size = 1
+
+;--- DSP UP/DOWN Units Register Groups ---
+
+[UPDOWN0.CR]
+AddrSpace = 2
+Addr = 0x80000280
+Size = 1
+
+[UPDOWN0.SR]
+AddrSpace = 2
+Addr = 0x80000281
+Size = 1
+
+[UPDOWN0.STEP]
+AddrSpace = 2
+Addr = 0x80000282
+Size = 1
+
+[UPDOWN0.DR]
+AddrSpace = 2
+Addr = 0x80000284
+Size = 4
+
+[UPDOWN0.RCNT]
+AddrSpace = 2
+Addr = 0x80000288
+Size = 1
+
+[UPDOWN0.XCR]
+AddrSpace = 2
+Addr = 0x80000289
+Size = 1
+
+[UPDOWN0.RCNT_STEP]
+AddrSpace = 2
+Addr = 0x8000028a
+Size = 1
+
+[UPDOWN1.CR]
+AddrSpace = 2
+Addr = 0x80000260
+Size = 1
+
+[UPDOWN1.SR]
+AddrSpace = 2
+Addr = 0x80000261
+Size = 1
+
+[UPDOWN1.STEP]
+AddrSpace = 2
+Addr = 0x80000262
+Size = 1
+
+[UPDOWN1.DR]
+AddrSpace = 2
+Addr = 0x80000264
+Size = 4
+
+[UPDOWN1.RCNT]
+AddrSpace = 2
+Addr = 0x80000268
+Size = 1
+
+[UPDOWN1.XCR]
+AddrSpace = 2
+Addr = 0x80000269
+Size = 1
+
+[UPDOWN1.RCNT_STEP]
+AddrSpace = 2
+Addr = 0x8000026a
+Size = 1
+
+[UPDOWN2.CR]
+AddrSpace = 2
+Addr = 0x800002a0
+Size = 1
+
+[UPDOWN2.SR]
+AddrSpace = 2
+Addr = 0x800002a1
+Size = 1
+
+[UPDOWN2.STEP]
+AddrSpace = 2
+Addr = 0x800002a2
+Size = 1
+
+[UPDOWN2.DR]
+AddrSpace = 2
+Addr = 0x800002a4
+Size = 4
+
+[UPDOWN2.RCNT]
+AddrSpace = 2
+Addr = 0x800002a8
+Size = 1
+
+[UPDOWN2.XCR]
+AddrSpace = 2
+Addr = 0x800002a9
+Size = 1
+
+[UPDOWN2.RCNT_STEP]
+AddrSpace = 2
+Addr = 0x800002aa
+Size = 1
+
+[UPDOWN3.CR]
+AddrSpace = 2
+Addr = 0x800002c0
+Size = 1
+
+[UPDOWN3.SR]
+AddrSpace = 2
+Addr = 0x800002c1
+Size = 1
+
+[UPDOWN3.STEP]
+AddrSpace = 2
+Addr = 0x800002c2
+Size = 1
+
+[UPDOWN3.DR]
+AddrSpace = 2
+Addr = 0x800002c4
+Size = 4
+
+[UPDOWN3.RCNT]
+AddrSpace = 2
+Addr = 0x800002c8
+Size = 1
+
+[UPDOWN3.XCR]
+AddrSpace = 2
+Addr = 0x800002c9
+Size = 1
+
+[UPDOWN3.RCNT_STEP]
+AddrSpace = 2
+Addr = 0x800002ca
+Size = 1
+
+;--- I2C Register Group ---
+
+[I2C.CR]
+AddrSpace = 2
+Addr = 0x800002e0
+Size = 1
+
+[I2C.SR]
+AddrSpace = 2
+Addr = 0x800002e1
+Size = 1
+
+[I2C.DR]
+AddrSpace = 2
+Addr = 0x800002e2
+Size = 1
+
+[I2C.AR]
+AddrSpace = 2
+Addr = 0x800002e3
+Size = 1
+
+[I2C.VR]
+AddrSpace = 2
+Addr = 0x800002e4
+Size = 1
+
+[I2C.CR_set]
+AddrSpace = 2
+Addr = 0x800002e5
+Size = 1
+
+[I2C.CR_clear]
+AddrSpace = 2
+Addr = 0x800002e6
+Size = 1
+
+[I2C.AXR]
+AddrSpace = 2
+Addr = 0x800002e7
+Size = 1
+
+[I2C.INFO]
+AddrSpace = 2
+Addr = 0x800002e8
+Size = 1
+
+[I2C.PR]
+AddrSpace = 2
+Addr = 0x800002e9
+Size = 1
+
+
+;--- Generic Timers Register Group ---
+
+[TIMER0L]
+AddrSpace = 2
+Addr = 0x80000350
+Size = 1
+Access = 1
+
+[TIMER0H]
+AddrSpace = 2
+Addr = 0x80000351
+Size = 1
+Access = 1
+
+[TIMER1L]
+AddrSpace = 2
+Addr = 0x80000352
+Size = 1
+Access = 1
+
+[TIMER1H]
+AddrSpace = 2
+Addr = 0x80000353
+Size = 1
+Access = 1
+
+[TMRIN0L]
+AddrSpace = 2
+Addr = 0x80000354
+Size = 1
+
+[TMRIN0H]
+AddrSpace = 2
+Addr = 0x80000355
+Size = 1
+
+[TMRIN1L]
+AddrSpace = 2
+Addr = 0x80000356
+Size = 1
+
+[TMRIN1H]
+AddrSpace = 2
+Addr = 0x80000357
+Size = 1
+
+
+;--- PWM Timers Register Groups ---
+
+[TIMER0.CNT]
+AddrSpace = 2
+Addr = 0x80000400
+Size = 1
+
+[TIMER0.PSG]
+AddrSpace = 2
+Addr = 0x80000401
+Size = 1
+
+[TIMER0.ARR]
+AddrSpace = 2
+Addr = 0x80000402
+Size = 1
+
+[TIMER0.CNTRL]
+AddrSpace = 2
+Addr = 0x80000403
+Size = 1
+
+[TIMER0.CCR1]
+AddrSpace = 2
+Addr = 0x80000404
+Size = 1
+
+[TIMER0.CCR2]
+AddrSpace = 2
+Addr = 0x80000405
+Size = 1
+
+[TIMER0.CCR3]
+AddrSpace = 2
+Addr = 0x80000406
+Size = 1
+
+[TIMER0.CCR4]
+AddrSpace = 2
+Addr = 0x80000407
+Size = 1
+
+[TIMER0.CH1_CNTRL]
+AddrSpace = 2
+Addr = 0x80000408
+Size = 1
+
+[TIMER0.CH2_CNTRL]
+AddrSpace = 2
+Addr = 0x80000409
+Size = 1
+
+[TIMER0.CH3_CNTRL]
+AddrSpace = 2
+Addr = 0x8000040a
+Size = 1
+
+[TIMER0.CH4_CNTRL]
+AddrSpace = 2
+Addr = 0x8000040b
+Size = 1
+
+[TIMER0.CH1_CNTRL1]
+AddrSpace = 2
+Addr = 0x8000040c
+Size = 1
+
+[TIMER0.CH2_CNTRL1]
+AddrSpace = 2
+Addr = 0x8000040d
+Size = 1
+
+[TIMER0.CH3_CNTRL1]
+AddrSpace = 2
+Addr = 0x8000040e
+Size = 1
+
+[TIMER0.CH4_CNTRL1]
+AddrSpace = 2
+Addr = 0x8000040f
+Size = 1
+
+[TIMER0.CH1_DTG]
+AddrSpace = 2
+Addr = 0x80000410
+Size = 1
+
+[TIMER0.CH2_DTG]
+AddrSpace = 2
+Addr = 0x80000411
+Size = 1
+
+[TIMER0.CH3_DTG]
+AddrSpace = 2
+Addr = 0x80000412
+Size = 1
+
+[TIMER0.CH4_DTG]
+AddrSpace = 2
+Addr = 0x80000413
+Size = 1
+
+[TIMER0.BRKETR_CNTRL]
+AddrSpace = 2
+Addr = 0x80000414
+Size = 1
+
+[TIMER0.STATUS]
+AddrSpace = 2
+Addr = 0x80000415
+Size = 1
+
+[TIMER0.IE]
+AddrSpace = 2
+Addr = 0x80000416
+Size = 1
+
+[TIMER0.DMA_RE]
+AddrSpace = 2
+Addr = 0x80000417
+Size = 1
+
+[TIMER0.CH1_CNTRL2]
+AddrSpace = 2
+Addr = 0x80000418
+Size = 1
+
+[TIMER0.CH2_CNTRL2]
+AddrSpace = 2
+Addr = 0x80000419
+Size = 1
+
+[TIMER0.CH3_CNTRL2]
+AddrSpace = 2
+Addr = 0x8000041a
+Size = 1
+
+[TIMER0.CH4_CNTRL2]
+AddrSpace = 2
+Addr = 0x8000041b
+Size = 1
+
+[TIMER0.CCR11]
+AddrSpace = 2
+Addr = 0x8000041c
+Size = 1
+
+[TIMER0.CCR21]
+AddrSpace = 2
+Addr = 0x8000041d
+Size = 1
+
+[TIMER0.CCR31]
+AddrSpace = 2
+Addr = 0x8000041e
+Size = 1
+
+[TIMER0.CCR41]
+AddrSpace = 2
+Addr = 0x8000041f
+Size = 1
+
+[TIMER0.DMA_RE1]
+AddrSpace = 2
+Addr = 0x80000420
+Size = 1
+
+[TIMER0.DMA_RE2]
+AddrSpace = 2
+Addr = 0x80000421
+Size = 1
+
+[TIMER0.DMA_RE3]
+AddrSpace = 2
+Addr = 0x80000422
+Size = 1
+
+[TIMER0.DMA_RE4]
+AddrSpace = 2
+Addr = 0x80000423
+Size = 1
+
+
+[TIMER1.CNT]
+AddrSpace = 2
+Addr = 0x80000440
+Size = 1
+
+[TIMER1.PSG]
+AddrSpace = 2
+Addr = 0x80000441
+Size = 1
+
+[TIMER1.ARR]
+AddrSpace = 2
+Addr = 0x80000442
+Size = 1
+
+[TIMER1.CNTRL]
+AddrSpace = 2
+Addr = 0x80000443
+Size = 1
+
+[TIMER1.CCR1]
+AddrSpace = 2
+Addr = 0x80000444
+Size = 1
+
+[TIMER1.CCR2]
+AddrSpace = 2
+Addr = 0x80000445
+Size = 1
+
+[TIMER1.CCR3]
+AddrSpace = 2
+Addr = 0x80000446
+Size = 1
+
+[TIMER1.CCR4]
+AddrSpace = 2
+Addr = 0x80000447
+Size = 1
+
+[TIMER1.CH1_CNTRL]
+AddrSpace = 2
+Addr = 0x80000448
+Size = 1
+
+[TIMER1.CH2_CNTRL]
+AddrSpace = 2
+Addr = 0x80000449
+Size = 1
+
+[TIMER1.CH3_CNTRL]
+AddrSpace = 2
+Addr = 0x8000044a
+Size = 1
+
+[TIMER1.CH4_CNTRL]
+AddrSpace = 2
+Addr = 0x8000044b
+Size = 1
+
+[TIMER1.CH1_CNTRL1]
+AddrSpace = 2
+Addr = 0x8000044c
+Size = 1
+
+[TIMER1.CH2_CNTRL1]
+AddrSpace = 2
+Addr = 0x8000044d
+Size = 1
+
+[TIMER1.CH3_CNTRL1]
+AddrSpace = 2
+Addr = 0x8000044e
+Size = 1
+
+[TIMER1.CH4_CNTRL1]
+AddrSpace = 2
+Addr = 0x8000044f
+Size = 1
+
+[TIMER1.CH1_DTG]
+AddrSpace = 2
+Addr = 0x80000450
+Size = 1
+
+[TIMER1.CH2_DTG]
+AddrSpace = 2
+Addr = 0x80000451
+Size = 1
+
+[TIMER1.CH3_DTG]
+AddrSpace = 2
+Addr = 0x80000452
+Size = 1
+
+[TIMER1.CH4_DTG]
+AddrSpace = 2
+Addr = 0x80000453
+Size = 1
+
+[TIMER1.BRKETR_CNTRL]
+AddrSpace = 2
+Addr = 0x80000454
+Size = 1
+
+[TIMER1.STATUS]
+AddrSpace = 2
+Addr = 0x80000455
+Size = 1
+
+[TIMER1.IE]
+AddrSpace = 2
+Addr = 0x80000456
+Size = 1
+
+[TIMER1.DMA_RE]
+AddrSpace = 2
+Addr = 0x80000457
+Size = 1
+
+[TIMER1.CH1_CNTRL2]
+AddrSpace = 2
+Addr = 0x80000458
+Size = 1
+
+[TIMER1.CH2_CNTRL2]
+AddrSpace = 2
+Addr = 0x80000459
+Size = 1
+
+[TIMER1.CH3_CNTRL2]
+AddrSpace = 2
+Addr = 0x8000045a
+Size = 1
+
+[TIMER1.CH4_CNTRL2]
+AddrSpace = 2
+Addr = 0x8000045b
+Size = 1
+
+[TIMER1.CCR11]
+AddrSpace = 2
+Addr = 0x8000045c
+Size = 1
+
+[TIMER1.CCR21]
+AddrSpace = 2
+Addr = 0x8000045d
+Size = 1
+
+[TIMER1.CCR31]
+AddrSpace = 2
+Addr = 0x8000045e
+Size = 1
+
+[TIMER1.CCR41]
+AddrSpace = 2
+Addr = 0x8000045f
+Size = 1
+
+[TIMER1.DMA_RE1]
+AddrSpace = 2
+Addr = 0x80000460
+Size = 1
+
+[TIMER1.DMA_RE2]
+AddrSpace = 2
+Addr = 0x80000461
+Size = 1
+
+[TIMER1.DMA_RE3]
+AddrSpace = 2
+Addr = 0x80000462
+Size = 1
+
+[TIMER1.DMA_RE4]
+AddrSpace = 2
+Addr = 0x80000463
+Size = 1
+
+
+;--- GPIO Port PA Register Groups ---
+
+[PA.DR_LD]
+AddrSpace = 2
+Addr = 0x80001000
+Size = 1
+
+[PA.DR_SET]
+AddrSpace = 2
+Addr = 0x80001001
+Size = 1
+
+[PA.DR_CLR]
+AddrSpace = 2
+Addr = 0x80001002
+Size = 1
+
+[PA.DR_INV]
+AddrSpace = 2
+Addr = 0x80001003
+Size = 1
+
+[PA.DDR_LD]
+AddrSpace = 2
+Addr = 0x80001004
+Size = 1
+
+[PA.DDR_SET]
+AddrSpace = 2
+Addr = 0x80001005
+Size = 1
+
+[PA.DDR_CLR]
+AddrSpace = 2
+Addr = 0x80001006
+Size = 1
+
+[PA.DDR_INV]
+AddrSpace = 2
+Addr = 0x80001007
+Size = 1
+
+[PA.PEIE_LD]
+AddrSpace = 2
+Addr = 0x80001008
+Size = 1
+
+[PA.PEIE_SET]
+AddrSpace = 2
+Addr = 0x80001009
+Size = 1
+
+[PA.PEIE_CLR]
+AddrSpace = 2
+Addr = 0x8000100a
+Size = 1
+
+[PA.PEIE_INV]
+AddrSpace = 2
+Addr = 0x8000100b
+Size = 1
+
+[PA.NEIE_LD]
+AddrSpace = 2
+Addr = 0x8000100c
+Size = 1
+
+[PA.NEIE_SET]
+AddrSpace = 2
+Addr = 0x8000100d
+Size = 1
+
+[PA.NEIE_CLR]
+AddrSpace = 2
+Addr = 0x8000100e
+Size = 1
+
+[PA.NEIE_INV]
+AddrSpace = 2
+Addr = 0x8000100f
+Size = 1
+
+[PA.INVR_LD]
+AddrSpace = 2
+Addr = 0x80001010
+Size = 1
+
+[PA.INVR_SET]
+AddrSpace = 2
+Addr = 0x80001011
+Size = 1
+
+[PA.INVR_CLR]
+AddrSpace = 2
+Addr = 0x80001012
+Size = 1
+
+[PA.INVR_INV]
+AddrSpace = 2
+Addr = 0x80001013
+Size = 1
+
+[PA.IMR_LD]
+AddrSpace = 2
+Addr = 0x80001014
+Size = 1
+
+[PA.IMR_SET]
+AddrSpace = 2
+Addr = 0x80001015
+Size = 1
+
+[PA.IMR_CLR]
+AddrSpace = 2
+Addr = 0x80001016
+Size = 1
+
+[PA.IMR_INV]
+AddrSpace = 2
+Addr = 0x80001017
+Size = 1
+
+[PA.ALT_LD]
+AddrSpace = 2
+Addr = 0x80001018
+Size = 1
+
+[PA.ALT_SET]
+AddrSpace = 2
+Addr = 0x80001019
+Size = 1
+
+[PA.ALT_CLR]
+AddrSpace = 2
+Addr = 0x8000101a
+Size = 1
+
+[PA.ALT_INV]
+AddrSpace = 2
+Addr = 0x8000101b
+Size = 1
+
+[PA.PUR_LD]
+AddrSpace = 2
+Addr = 0x8000101c
+Size = 1
+
+[PA.PUR_SET]
+AddrSpace = 2
+Addr = 0x8000101d
+Size = 1
+
+[PA.PUR_CLR]
+AddrSpace = 2
+Addr = 0x8000101e
+Size = 1
+
+[PA.PUR_INV]
+AddrSpace = 2
+Addr = 0x8000101f
+Size = 1
+
+[PA.PXD]
+AddrSpace = 2
+Access = 1
+Addr = 0x80001020
+Size = 1
+
+[PA.INTREQ]
+AddrSpace = 2
+Addr = 0x80001021
+Size = 1
+Access = 1
+
+[PA.ECLR]
+AddrSpace = 2
+Addr = 0x80001023
+Size = 1
+
+;--- GPIO Port PB Register Groups ---
+
+[PB.DR_LD]
+AddrSpace = 2
+Addr = 0x80001040
+Size = 1
+
+[PB.DR_SET]
+AddrSpace = 2
+Addr = 0x80001041
+Size = 1
+
+[PB.DR_CLR]
+AddrSpace = 2
+Addr = 0x80001042
+Size = 1
+
+[PB.DR_INV]
+AddrSpace = 2
+Addr = 0x80001043
+Size = 1
+
+[PB.DDR_LD]
+AddrSpace = 2
+Addr = 0x80001044
+Size = 1
+
+[PB.DDR_SET]
+AddrSpace = 2
+Addr = 0x80001045
+Size = 1
+
+[PB.DDR_CLR]
+AddrSpace = 2
+Addr = 0x80001046
+Size = 1
+
+[PB.DDR_INV]
+AddrSpace = 2
+Addr = 0x80001047
+Size = 1
+
+[PB.PEIE_LD]
+AddrSpace = 2
+Addr = 0x80001048
+Size = 1
+
+[PB.PEIE_SET]
+AddrSpace = 2
+Addr = 0x80001049
+Size = 1
+
+[PB.PEIE_CLR]
+AddrSpace = 2
+Addr = 0x8000104a
+Size = 1
+
+[PB.PEIE_INV]
+AddrSpace = 2
+Addr = 0x8000104b
+Size = 1
+
+[PB.NEIE_LD]
+AddrSpace = 2
+Addr = 0x8000104c
+Size = 1
+
+[PB.NEIE_SET]
+AddrSpace = 2
+Addr = 0x8000104d
+Size = 1
+
+[PB.NEIE_CLR]
+AddrSpace = 2
+Addr = 0x8000104e
+Size = 1
+
+[PB.NEIE_INV]
+AddrSpace = 2
+Addr = 0x8000104f
+Size = 1
+
+[PB.INVR_LD]
+AddrSpace = 2
+Addr = 0x80001050
+Size = 1
+
+[PB.INVR_SET]
+AddrSpace = 2
+Addr = 0x80001051
+Size = 1
+
+[PB.INVR_CLR]
+AddrSpace = 2
+Addr = 0x80001052
+Size = 1
+
+[PB.INVR_INV]
+AddrSpace = 2
+Addr = 0x80001053
+Size = 1
+
+[PB.IMR_LD]
+AddrSpace = 2
+Addr = 0x80001054
+Size = 1
+
+[PB.IMR_SET]
+AddrSpace = 2
+Addr = 0x80001055
+Size = 1
+
+[PB.IMR_CLR]
+AddrSpace = 2
+Addr = 0x80001056
+Size = 1
+
+[PB.IMR_INV]
+AddrSpace = 2
+Addr = 0x80001057
+Size = 1
+
+[PB.ALT_LD]
+AddrSpace = 2
+Addr = 0x80001058
+Size = 1
+
+[PB.ALT_SET]
+AddrSpace = 2
+Addr = 0x80001059
+Size = 1
+
+[PB.ALT_CLR]
+AddrSpace = 2
+Addr = 0x8000105a
+Size = 1
+
+[PB.ALT_INV]
+AddrSpace = 2
+Addr = 0x8000105b
+Size = 1
+
+[PB.PUR_LD]
+AddrSpace = 2
+Addr = 0x8000105c
+Size = 1
+
+[PB.PUR_SET]
+AddrSpace = 2
+Addr = 0x8000105d
+Size = 1
+
+[PB.PUR_CLR]
+AddrSpace = 2
+Addr = 0x8000105e
+Size = 1
+
+[PB.PUR_INV]
+AddrSpace = 2
+Addr = 0x8000105f
+Size = 1
+
+[PB.PXD]
+AddrSpace = 2
+Addr = 0x80001060
+Size = 1
+Access = 1
+
+[PB.INTREQ]
+AddrSpace = 2
+Access = 1
+Addr = 0x80001061
+Size = 1
+
+[PB.ECLR]
+AddrSpace = 2
+Addr = 0x80001063
+Size = 1
+
+
+;--- GPIO Port PC Register Groups ---
+
+[PC.DR_LD]
+AddrSpace = 2
+Addr = 0x80001080
+Size = 1
+
+[PC.DR_SET]
+AddrSpace = 2
+Addr = 0x80001081
+Size = 1
+
+[PC.DR_CLR]
+AddrSpace = 2
+Addr = 0x80001082
+Size = 1
+
+[PC.DR_INV]
+AddrSpace = 2
+Addr = 0x80001083
+Size = 1
+
+[PC.DDR_LD]
+AddrSpace = 2
+Addr = 0x80001084
+Size = 1
+
+[PC.DDR_SET]
+AddrSpace = 2
+Addr = 0x80001085
+Size = 1
+
+[PC.DDR_CLR]
+AddrSpace = 2
+Addr = 0x80001086
+Size = 1
+
+[PC.DDR_INV]
+AddrSpace = 2
+Addr = 0x80001087
+Size = 1
+
+[PC.PEIE_LD]
+AddrSpace = 2
+Addr = 0x80001088
+Size = 1
+
+[PC.PEIE_SET]
+AddrSpace = 2
+Addr = 0x80001089
+Size = 1
+
+[PC.PEIE_CLR]
+AddrSpace = 2
+Addr = 0x8000108a
+Size = 1
+
+[PC.PEIE_INV]
+AddrSpace = 2
+Addr = 0x8000108b
+Size = 1
+
+[PC.NEIE_LD]
+AddrSpace = 2
+Addr = 0x8000108c
+Size = 1
+
+[PC.NEIE_SET]
+AddrSpace = 2
+Addr = 0x8000108d
+Size = 1
+
+[PC.NEIE_CLR]
+AddrSpace = 2
+Addr = 0x8000108e
+Size = 1
+
+[PC.NEIE_INV]
+AddrSpace = 2
+Addr = 0x8000108f
+Size = 1
+
+[PC.INVR_LD]
+AddrSpace = 2
+Addr = 0x80001090
+Size = 1
+
+[PC.INVR_SET]
+AddrSpace = 2
+Addr = 0x80001091
+Size = 1
+
+[PC.INVR_CLR]
+AddrSpace = 2
+Addr = 0x80001092
+Size = 1
+
+[PC.INVR_INV]
+AddrSpace = 2
+Addr = 0x80001093
+Size = 1
+
+[PC.IMR_LD]
+AddrSpace = 2
+Addr = 0x80001094
+Size = 1
+
+[PC.IMR_SET]
+AddrSpace = 2
+Addr = 0x80001095
+Size = 1
+
+[PC.IMR_CLR]
+AddrSpace = 2
+Addr = 0x80001096
+Size = 1
+
+[PC.IMR_INV]
+AddrSpace = 2
+Addr = 0x80001097
+Size = 1
+
+[PC.ALT_LD]
+AddrSpace = 2
+Addr = 0x80001098
+Size = 1
+
+[PC.ALT_SET]
+AddrSpace = 2
+Addr = 0x80001099
+Size = 1
+
+[PC.ALT_CLR]
+AddrSpace = 2
+Addr = 0x8000109a
+Size = 1
+
+[PC.ALT_INV]
+AddrSpace = 2
+Addr = 0x8000109b
+Size = 1
+
+[PC.PUR_LD]
+AddrSpace = 2
+Addr = 0x8000109c
+Size = 1
+
+[PC.PUR_SET]
+AddrSpace = 2
+Addr = 0x8000109d
+Size = 1
+
+[PC.PUR_CLR]
+AddrSpace = 2
+Addr = 0x8000109e
+Size = 1
+
+[PC.PUR_INV]
+AddrSpace = 2
+Addr = 0x8000109f
+Size = 1
+
+[PC.PXD]
+AddrSpace = 2
+Access = 1
+Addr = 0x800010a0
+Size = 1
+
+[PC.INTREQ]
+AddrSpace = 2
+Addr = 0x800010a1
+Size = 1
+Access = 1
+
+[PC.ECLR]
+AddrSpace = 2
+Addr = 0x800010a3
+Size = 1
+
+
+;--- GPIO Ports PD,PE Register Groups ---
+
+[PDPE.PD_LOAD]
+AddrSpace = 2
+Addr = 0x80000090
+Size = 1
+
+[PDPE.PD_SET]
+AddrSpace = 2
+Addr = 0x80000091
+Size = 1
+
+[PDPE.PD_CLEAR]
+AddrSpace = 2
+Addr = 0x80000092
+Size = 1
+
+[PDPE.PD_DIR]
+AddrSpace = 2
+Addr = 0x80000093
+Size = 1
+
+[PDPE.PE_LOAD]
+AddrSpace = 2
+Addr = 0x80000094
+Size = 1
+
+[PDPE.PE_SET]
+AddrSpace = 2
+Addr = 0x80000095
+Size = 1
+
+[PDPE.PE_CLEAR]
+AddrSpace = 2
+Addr = 0x80000096
+Size = 1
+
+[PDPE.PX_ALT]
+AddrSpace = 2
+Addr = 0x80000098
+Size = 1
+
+[PDPE.PD_PIN]
+AddrSpace = 2
+Addr = 0x80000099
+Size = 1
+Access = 1
+
+[PDPE.PD_PU]
+AddrSpace = 2
+Addr = 0x8000009a
+Size = 1
+
+
+;--- ARINC Units Register Groups ---
+
+[ARINC429.R0.RX_CR]
+AddrSpace = 2
+Addr = 0x80002000
+Size = 1
+
+[ARINC429.R0.DATA_R]
+AddrSpace = 2
+Addr = 0x80002002
+Size = 1
+
+[ARINC429.R0.STATUS]
+AddrSpace = 2
+Addr = 0x80002003
+Size = 1
+
+[ARINC429.R1.RX_CR]
+AddrSpace = 2
+Addr = 0x80002004
+Size = 1
+
+[ARINC429.R1.DATA_R]
+AddrSpace = 2
+Addr = 0x80002006
+Size = 1
+
+[ARINC429.R1.STATUS]
+AddrSpace = 2
+Addr = 0x80002007
+Size = 1
+
+[ARINC429.R2.RX_CR]
+AddrSpace = 2
+Addr = 0x80002008
+Size = 1
+
+[ARINC429.R2.DATA_R]
+AddrSpace = 2
+Addr = 0x8000200a
+Size = 1
+
+[ARINC429.R2.STATUS]
+AddrSpace = 2
+Addr = 0x8000200b
+Size = 1
+
+[ARINC429.R3.RX_CR]
+AddrSpace = 2
+Addr = 0x8000200c
+Size = 1
+
+[ARINC429.R3.DATA_R]
+AddrSpace = 2
+Addr = 0x8000200e
+Size = 1
+
+[ARINC429.R3.STATUS]
+AddrSpace = 2
+Addr = 0x8000200f
+Size = 1
+
+[ARINC429.R4.RX_CR]
+AddrSpace = 2
+Addr = 0x80002010
+Size = 1
+
+[ARINC429.R4.DATA_R]
+AddrSpace = 2
+Addr = 0x80002012
+Size = 1
+
+[ARINC429.R4.STATUS]
+AddrSpace = 2
+Addr = 0x80002013
+Size = 1
+
+[ARINC429.R5.RX_CR]
+AddrSpace = 2
+Addr = 0x80002014
+Size = 1
+
+[ARINC429.R5.DATA_R]
+AddrSpace = 2
+Addr = 0x80002016
+Size = 1
+
+[ARINC429.R5.STATUS]
+AddrSpace = 2
+Addr = 0x80002017
+Size = 1
+
+[ARINC429.R6.RX_CR]
+AddrSpace = 2
+Addr = 0x80002018
+Size = 1
+
+[ARINC429.R6.DATA_R]
+AddrSpace = 2
+Addr = 0x8000201a
+Size = 1
+
+[ARINC429.R6.STATUS]
+AddrSpace = 2
+Addr = 0x8000201b
+Size = 1
+
+[ARINC429.R7.RX_CR]
+AddrSpace = 2
+Addr = 0x8000201c
+Size = 1
+
+[ARINC429.R7.DATA_R]
+AddrSpace = 2
+Addr = 0x8000201e
+Size = 1
+
+[ARINC429.R7.STATUS]
+AddrSpace = 2
+Addr = 0x8000201f
+Size = 1
+
+
+[ARINC429.T0.CONTROL]
+AddrSpace = 2
+Addr = 0x80003000
+Size = 1
+
+[ARINC429.T0.DATA_T]
+AddrSpace = 2
+Addr = 0x80003002
+Size = 1
+
+[ARINC429.T0.STATUS]
+AddrSpace = 2
+Addr = 0x80003003
+Size = 1
+
+[ARINC429.T1.CONTROL]
+AddrSpace = 2
+Addr = 0x80003004
+Size = 1
+
+[ARINC429.T1.DATA_T]
+AddrSpace = 2
+Addr = 0x80003006
+Size = 1
+
+[ARINC429.T1.STATUS]
+AddrSpace = 2
+Addr = 0x80003007
+Size = 1
+
+[ARINC429.T2.CONTROL]
+AddrSpace = 2
+Addr = 0x80003008
+Size = 1
+
+[ARINC429.T2.DATA_T]
+AddrSpace = 2
+Addr = 0x8000300a
+Size = 1
+
+[ARINC429.T2.STATUS]
+AddrSpace = 2
+Addr = 0x8000300b
+Size = 1
+
+[ARINC429.T3.CONTROL]
+AddrSpace = 2
+Addr = 0x8000300c
+Size = 1
+
+[ARINC429.T3.DATA_T]
+AddrSpace = 2
+Addr = 0x8000300e
+Size = 1
+
+[ARINC429.T3.STATUS]
+AddrSpace = 2
+Addr = 0x8000300f
+Size = 1
+
+;--- DIGC Register Group ---
+
+[DIGC.CH0.SC0_CNT]
+AddrSpace = 2
+Addr = 0x80005000
+Size = 1
+
+[DIGC.CH0.SC0_STEP]
+AddrSpace = 2
+Addr = 0x80005001
+Size = 1
+
+[DIGC.CH0.DZ0_CNT]
+AddrSpace = 2
+Addr = 0x80005002
+Size = 1
+
+[DIGC.CH0.DZ0_STEP]
+AddrSpace = 2
+Addr = 0x80005003
+Size = 1
+
+[DIGC.CH0.SC1_CNT]
+AddrSpace = 2
+Addr = 0x80005004
+Size = 1
+
+[DIGC.CH0.SC1_STEP]
+AddrSpace = 2
+Addr = 0x80005005
+Size = 1
+
+[DIGC.CH0.DZ1_CNT]
+AddrSpace = 2
+Addr = 0x80005006
+Size = 1
+
+[DIGC.CH0.DZ1_STEP]
+AddrSpace = 2
+Addr = 0x80005007
+Size = 1
+
+[DIGC.CH1.SC0_CNT]
+AddrSpace = 2
+Addr = 0x80005008
+Size = 1
+
+[DIGC.CH1.SC0_STEP]
+AddrSpace = 2
+Addr = 0x80005009
+Size = 1
+
+[DIGC.CH1.DZ0_CNT]
+AddrSpace = 2
+Addr = 0x8000500a
+Size = 1
+
+[DIGC.CH1.DZ0_STEP]
+AddrSpace = 2
+Addr = 0x8000500b
+Size = 1
+
+[DIGC.CH1.SC1_CNT]
+AddrSpace = 2
+Addr = 0x8000500c
+Size = 1
+
+[DIGC.CH1.SC1_STEP]
+AddrSpace = 2
+Addr = 0x8000500d
+Size = 1
+
+[DIGC.CH1.DZ1_CNT]
+AddrSpace = 2
+Addr = 0x8000500e
+Size = 1
+
+[DIGC.CH1.DZ1_STEP]
+AddrSpace = 2
+Addr = 0x8000500f
+Size = 1
+
+[DIGC.CH2.SC0_CNT]
+AddrSpace = 2
+Addr = 0x80005010
+Size = 1
+
+[DIGC.CH2.SC0_STEP]
+AddrSpace = 2
+Addr = 0x80005011
+Size = 1
+
+[DIGC.CH2.DZ0_CNT]
+AddrSpace = 2
+Addr = 0x80005012
+Size = 1
+
+[DIGC.CH2.DZ0_STEP]
+AddrSpace = 2
+Addr = 0x80005013
+Size = 1
+
+[DIGC.CH2.SC1_CNT]
+AddrSpace = 2
+Addr = 0x80005014
+Size = 1
+
+[DIGC.CH2.SC1_STEP]
+AddrSpace = 2
+Addr = 0x80005015
+Size = 1
+
+[DIGC.CH2.DZ1_CNT]
+AddrSpace = 2
+Addr = 0x80005016
+Size = 1
+
+[DIGC.CH2.DZ1_STEP]
+AddrSpace = 2
+Addr = 0x80005017
+Size = 1
+
+[DIGC.CH3.SC0_CNT]
+AddrSpace = 2
+Addr = 0x80005018
+Size = 1
+
+[DIGC.CH3.SC0_STEP]
+AddrSpace = 2
+Addr = 0x80005019
+Size = 1
+
+[DIGC.CH3.DZ0_CNT]
+AddrSpace = 2
+Addr = 0x8000501a
+Size = 1
+
+[DIGC.CH3.DZ0_STEP]
+AddrSpace = 2
+Addr = 0x8000501b
+Size = 1
+
+[DIGC.CH3.SC1_CNT]
+AddrSpace = 2
+Addr = 0x8000501c
+Size = 1
+
+[DIGC.CH3.SC1_STEP]
+AddrSpace = 2
+Addr = 0x8000501d
+Size = 1
+
+[DIGC.CH3.DZ1_CNT]
+AddrSpace = 2
+Addr = 0x8000501e
+Size = 1
+
+[DIGC.CH3.DZ1_STEP]
+AddrSpace = 2
+Addr = 0x8000501f
+Size = 1
+
+[DIGC.CH4.SC0_CNT]
+AddrSpace = 2
+Addr = 0x80005020
+Size = 1
+
+[DIGC.CH4.SC0_STEP]
+AddrSpace = 2
+Addr = 0x80005021
+Size = 1
+
+[DIGC.CH4.DZ0_CNT]
+AddrSpace = 2
+Addr = 0x80005022
+Size = 1
+
+[DIGC.CH4.DZ0_STEP]
+AddrSpace = 2
+Addr = 0x80005023
+Size = 1
+
+[DIGC.CH4.SC1_CNT]
+AddrSpace = 2
+Addr = 0x80005024
+Size = 1
+
+[DIGC.CH4.SC1_STEP]
+AddrSpace = 2
+Addr = 0x80005025
+Size = 1
+
+[DIGC.CH4.DZ1_CNT]
+AddrSpace = 2
+Addr = 0x80005026
+Size = 1
+
+[DIGC.CH4.DZ1_STEP]
+AddrSpace = 2
+Addr = 0x80005027
+Size = 1
+
+[DIGC.CH5.SC0_CNT]
+AddrSpace = 2
+Addr = 0x80005028
+Size = 1
+
+[DIGC.CH5.SC0_STEP]
+AddrSpace = 2
+Addr = 0x80005029
+Size = 1
+
+[DIGC.CH5.DZ0_CNT]
+AddrSpace = 2
+Addr = 0x8000502a
+Size = 1
+
+[DIGC.CH5.DZ0_STEP]
+AddrSpace = 2
+Addr = 0x8000502b
+Size = 1
+
+[DIGC.CH5.SC1_CNT]
+AddrSpace = 2
+Addr = 0x8000502c
+Size = 1
+
+[DIGC.CH5.SC1_STEP]
+AddrSpace = 2
+Addr = 0x8000502d
+Size = 1
+
+[DIGC.CH5.DZ1_CNT]
+AddrSpace = 2
+Addr = 0x8000502e
+Size = 1
+
+[DIGC.CH5.DZ1_STEP]
+AddrSpace = 2
+Addr = 0x8000502f
+Size = 1
+
+[DIGC.CH6.SC0_CNT]
+AddrSpace = 2
+Addr = 0x80005030
+Size = 1
+
+[DIGC.CH6.SC0_STEP]
+AddrSpace = 2
+Addr = 0x80005031
+Size = 1
+
+[DIGC.CH6.DZ0_CNT]
+AddrSpace = 2
+Addr = 0x80005032
+Size = 1
+
+[DIGC.CH6.DZ0_STEP]
+AddrSpace = 2
+Addr = 0x80005033
+Size = 1
+
+[DIGC.CH6.SC1_CNT]
+AddrSpace = 2
+Addr = 0x80005034
+Size = 1
+
+[DIGC.CH6.SC1_STEP]
+AddrSpace = 2
+Addr = 0x80005035
+Size = 1
+
+[DIGC.CH6.DZ1_CNT]
+AddrSpace = 2
+Addr = 0x80005036
+Size = 1
+
+[DIGC.CH6.DZ1_STEP]
+AddrSpace = 2
+Addr = 0x80005037
+Size = 1
+
+[DIGC.CH7.SC0_CNT]
+AddrSpace = 2
+Addr = 0x80005038
+Size = 1
+
+[DIGC.CH7.SC0_STEP]
+AddrSpace = 2
+Addr = 0x80005039
+Size = 1
+
+[DIGC.CH7.DZ0_CNT]
+AddrSpace = 2
+Addr = 0x8000503a
+Size = 1
+
+[DIGC.CH7.DZ0_STEP]
+AddrSpace = 2
+Addr = 0x8000503b
+Size = 1
+
+[DIGC.CH7.SC1_CNT]
+AddrSpace = 2
+Addr = 0x8000503c
+Size = 1
+
+[DIGC.CH7.SC1_STEP]
+AddrSpace = 2
+Addr = 0x8000503d
+Size = 1
+
+[DIGC.CH7.DZ1_CNT]
+AddrSpace = 2
+Addr = 0x8000503e
+Size = 1
+
+[DIGC.CH7.DZ1_STEP]
+AddrSpace = 2
+Addr = 0x8000503f
+Size = 1
+
+[DIGC.CH8.SC0_CNT]
+AddrSpace = 2
+Addr = 0x80005040
+Size = 1
+
+[DIGC.CH8.SC0_STEP]
+AddrSpace = 2
+Addr = 0x80005041
+Size = 1
+
+[DIGC.CH8.DZ0_CNT]
+AddrSpace = 2
+Addr = 0x80005042
+Size = 1
+
+[DIGC.CH8.DZ0_STEP]
+AddrSpace = 2
+Addr = 0x80005043
+Size = 1
+
+[DIGC.CH8.SC1_CNT]
+AddrSpace = 2
+Addr = 0x80005044
+Size = 1
+
+[DIGC.CH8.SC1_STEP]
+AddrSpace = 2
+Addr = 0x80005045
+Size = 1
+
+[DIGC.CH8.DZ1_CNT]
+AddrSpace = 2
+Addr = 0x80005046
+Size = 1
+
+[DIGC.CH8.DZ1_STEP]
+AddrSpace = 2
+Addr = 0x80005047
+Size = 1
+
+[DIGC.CH9.SC0_CNT]
+AddrSpace = 2
+Addr = 0x80005048
+Size = 1
+
+[DIGC.CH9.SC0_STEP]
+AddrSpace = 2
+Addr = 0x80005049
+Size = 1
+
+[DIGC.CH9.DZ0_CNT]
+AddrSpace = 2
+Addr = 0x8000504a
+Size = 1
+
+[DIGC.CH9.DZ0_STEP]
+AddrSpace = 2
+Addr = 0x8000504b
+Size = 1
+
+[DIGC.CH9.SC1_CNT]
+AddrSpace = 2
+Addr = 0x8000504c
+Size = 1
+
+[DIGC.CH9.SC1_STEP]
+AddrSpace = 2
+Addr = 0x8000504d
+Size = 1
+
+[DIGC.CH9.DZ1_CNT]
+AddrSpace = 2
+Addr = 0x8000504e
+Size = 1
+
+[DIGC.CH9.DZ1_STEP]
+AddrSpace = 2
+Addr = 0x8000504f
+Size = 1
+
+[DIGC.CH10.SC0_CNT]
+AddrSpace = 2
+Addr = 0x80005050
+Size = 1
+
+[DIGC.CH10.SC0_STEP]
+AddrSpace = 2
+Addr = 0x80005051
+Size = 1
+
+[DIGC.CH10.DZ0_CNT]
+AddrSpace = 2
+Addr = 0x80005052
+Size = 1
+
+[DIGC.CH10.DZ0_STEP]
+AddrSpace = 2
+Addr = 0x80005053
+Size = 1
+
+[DIGC.CH10.SC1_CNT]
+AddrSpace = 2
+Addr = 0x80005054
+Size = 1
+
+[DIGC.CH10.SC1_STEP]
+AddrSpace = 2
+Addr = 0x80005055
+Size = 1
+
+[DIGC.CH10.DZ1_CNT]
+AddrSpace = 2
+Addr = 0x80005056
+Size = 1
+
+[DIGC.CH10.DZ1_STEP]
+AddrSpace = 2
+Addr = 0x80005057
+Size = 1
+
+[DIGC.CH11.SC0_CNT]
+AddrSpace = 2
+Addr = 0x80005058
+Size = 1
+
+[DIGC.CH11.SC0_STEP]
+AddrSpace = 2
+Addr = 0x80005059
+Size = 1
+
+[DIGC.CH11.DZ0_CNT]
+AddrSpace = 2
+Addr = 0x8000505a
+Size = 1
+
+[DIGC.CH11.DZ0_STEP]
+AddrSpace = 2
+Addr = 0x8000505b
+Size = 1
+
+[DIGC.CH11.SC1_CNT]
+AddrSpace = 2
+Addr = 0x8000505c
+Size = 1
+
+[DIGC.CH11.SC1_STEP]
+AddrSpace = 2
+Addr = 0x8000505d
+Size = 1
+
+[DIGC.CH11.DZ1_CNT]
+AddrSpace = 2
+Addr = 0x8000505e
+Size = 1
+
+[DIGC.CH11.DZ1_STEP]
+AddrSpace = 2
+Addr = 0x8000505f
+Size = 1
+
+[DIGC.CH12.SC0_CNT]
+AddrSpace = 2
+Addr = 0x80005060
+Size = 1
+
+[DIGC.CH12.SC0_STEP]
+AddrSpace = 2
+Addr = 0x80005061
+Size = 1
+
+[DIGC.CH12.DZ0_CNT]
+AddrSpace = 2
+Addr = 0x80005062
+Size = 1
+
+[DIGC.CH12.DZ0_STEP]
+AddrSpace = 2
+Addr = 0x80005063
+Size = 1
+
+[DIGC.CH12.SC1_CNT]
+AddrSpace = 2
+Addr = 0x80005064
+Size = 1
+
+[DIGC.CH12.SC1_STEP]
+AddrSpace = 2
+Addr = 0x80005065
+Size = 1
+
+[DIGC.CH12.DZ1_CNT]
+AddrSpace = 2
+Addr = 0x80005066
+Size = 1
+
+[DIGC.CH12.DZ1_STEP]
+AddrSpace = 2
+Addr = 0x80005067
+Size = 1
+
+[DIGC.CH13.SC0_CNT]
+AddrSpace = 2
+Addr = 0x80005068
+Size = 1
+
+[DIGC.CH13.SC0_STEP]
+AddrSpace = 2
+Addr = 0x80005069
+Size = 1
+
+[DIGC.CH13.DZ0_CNT]
+AddrSpace = 2
+Addr = 0x8000506a
+Size = 1
+
+[DIGC.CH13.DZ0_STEP]
+AddrSpace = 2
+Addr = 0x8000506b
+Size = 1
+
+[DIGC.CH13.SC1_CNT]
+AddrSpace = 2
+Addr = 0x8000506c
+Size = 1
+
+[DIGC.CH13.SC1_STEP]
+AddrSpace = 2
+Addr = 0x8000506d
+Size = 1
+
+[DIGC.CH13.DZ1_CNT]
+AddrSpace = 2
+Addr = 0x8000506e
+Size = 1
+
+[DIGC.CH13.DZ1_STEP]
+AddrSpace = 2
+Addr = 0x8000506f
+Size = 1
+
+[DIGC.CH14.SC0_CNT]
+AddrSpace = 2
+Addr = 0x80005070
+Size = 1
+
+[DIGC.CH14.SC0_STEP]
+AddrSpace = 2
+Addr = 0x80005071
+Size = 1
+
+[DIGC.CH14.DZ0_CNT]
+AddrSpace = 2
+Addr = 0x80005072
+Size = 1
+
+[DIGC.CH14.DZ0_STEP]
+AddrSpace = 2
+Addr = 0x80005073
+Size = 1
+
+[DIGC.CH14.SC1_CNT]
+AddrSpace = 2
+Addr = 0x80005074
+Size = 1
+
+[DIGC.CH14.SC1_STEP]
+AddrSpace = 2
+Addr = 0x80005075
+Size = 1
+
+[DIGC.CH14.DZ1_CNT]
+AddrSpace = 2
+Addr = 0x80005076
+Size = 1
+
+[DIGC.CH14.DZ1_STEP]
+AddrSpace = 2
+Addr = 0x80005077
+Size = 1
+
+[DIGC.CH15.SC0_CNT]
+AddrSpace = 2
+Addr = 0x80005078
+Size = 1
+
+[DIGC.CH15.SC0_STEP]
+AddrSpace = 2
+Addr = 0x80005079
+Size = 1
+
+[DIGC.CH15.DZ0_CNT]
+AddrSpace = 2
+Addr = 0x8000507a
+Size = 1
+
+[DIGC.CH15.DZ0_STEP]
+AddrSpace = 2
+Addr = 0x8000507b
+Size = 1
+
+[DIGC.CH15.SC1_CNT]
+AddrSpace = 2
+Addr = 0x8000507c
+Size = 1
+
+[DIGC.CH15.SC1_STEP]
+AddrSpace = 2
+Addr = 0x8000507d
+Size = 1
+
+[DIGC.CH15.DZ1_CNT]
+AddrSpace = 2
+Addr = 0x8000507e
+Size = 1
+
+[DIGC.CH15.DZ1_STEP]
+AddrSpace = 2
+Addr = 0x8000507f
+Size = 1
+
+[DIGC.CR]
+AddrSpace = 2
+Addr = 0x80005080
+Size = 1
+
+[DIGC.SR]
+AddrSpace = 2
+Addr = 0x80005081
+Size = 1
+
+[DIGC.LEN]
+AddrSpace = 2
+Addr = 0x80005082
+Size = 1
+
+[DIGC.TST]
+AddrSpace = 2
+Addr = 0x80005083
+Size = 1
+
+[DIGC.IRQ]
+AddrSpace = 2
+Addr = 0x80005084
+Size = 1
+
+[DIGC.CFG]
+AddrSpace = 2
+Addr = 0x80005085
+Size = 1
+
+
+;--- MIL-STD-1553B Register Groups ---
+
+[MIL0.CONTROL]
+AddrSpace = 2
+Addr = 0x80006400
+Size = 1
+
+[MIL0.STATUS]
+AddrSpace = 2
+Addr = 0x80006401
+Size = 1
+
+[MIL0.ERROR]
+AddrSpace = 2
+Addr = 0x80006402
+Size = 1
+
+[MIL0.CommandWord1]
+AddrSpace = 2
+Addr = 0x80006403
+Size = 1
+
+[MIL0.CommandWord2]
+AddrSpace = 2
+Addr = 0x80006404
+Size = 1
+
+[MIL0.ModeData]
+AddrSpace = 2
+Addr = 0x80006405
+Size = 1
+
+[MIL0.StatusWord1]
+AddrSpace = 2
+Addr = 0x80006406
+Size = 1
+
+[MIL0.StatusWord2]
+AddrSpace = 2
+Addr = 0x80006407
+Size = 1
+
+[MIL0.INTEN]
+AddrSpace = 2
+Addr = 0x80006408
+Size = 1
+
+[MIL0.MSG]
+AddrSpace = 2
+Addr = 0x80006409
+Size = 1
+
+[MIL1.CONTROL]
+AddrSpace = 2
+Addr = 0x80007400
+Size = 1
+
+[MIL1.STATUS]
+AddrSpace = 2
+Addr = 0x80007401
+Size = 1
+
+[MIL1.ERROR]
+AddrSpace = 2
+Addr = 0x80007402
+Size = 1
+
+[MIL1.CommandWord1]
+AddrSpace = 2
+Addr = 0x80007403
+Size = 1
+
+[MIL1.CommandWord2]
+AddrSpace = 2
+Addr = 0x80007404
+Size = 1
+
+[MIL1.ModeData]
+AddrSpace = 2
+Addr = 0x80007405
+Size = 1
+
+[MIL1.StatusWord1]
+AddrSpace = 2
+Addr = 0x80007406
+Size = 1
+
+[MIL1.StatusWord2]
+AddrSpace = 2
+Addr = 0x80007407
+Size = 1
+
+[MIL1.INTEN]
+AddrSpace = 2
+Addr = 0x80007408
+Size = 1
+
+[MIL1.MSG]
+AddrSpace = 2
+Addr = 0x80007409
+Size = 1
+
+
+;--- Debug Register Group ---
+[WP0CTL]
+Addr = 0x1E0360
+Size = 1
+
+[WP1CTL]
+Addr = 0x1E0361
+Size = 1
+
+[WP2CTL]
+Addr = 0x1E0362
+Size = 1
+
+[WP0STAT]
+Addr = 0x1E0364
+Size = 1
+Access = 1
+
+[WP1STAT]
+Addr = 0x1E0365
+Size = 1
+Access = 1
+
+[WP2STAT]
+Addr = 0x1E0366
+Size = 1
+Access = 1
+
+[WP0L]
+Addr = 0x1E0368
+Size = 1
+
+[WP0H]
+Addr = 0x1E0369
+Size = 1
+
+[WP1L]
+Addr = 0x1E036A
+Size = 1
+
+[WP1H]
+Addr = 0x1E036B
+Size = 1
+
+[WP2L]
+Addr = 0x1E036C
+Size = 1
+
+[WP2H]
+Addr = 0x1E036D
+Size = 1
+
+[WPDR]
+Addr = 0x1E036E
+Size = 1
+
+[WPMR]
+Addr = 0x1E036F
+Size = 1
+
+[CCNT0]
+Addr = 0x1E0370
+Size = 1
+
+[CCNT1]
+Addr = 0x1E0371
+Size = 1
+
+[PRFM]
+Addr = 0x1E0372
+Size = 1
+
+[PRFCNT]
+Addr = 0x1E0373
+Size = 1
+
+[TRCBMASK]
+Addr = 0x1E0374
+Size = 1
+Access = 1
+
+[TRCBPTR]
+Addr = 0x1E0375
+Size = 1
+Access = 1
+
+[TRCBVAL]
+Addr = 0x1E037C
+Size = 1
+Access = 1
+
+;--- Trace Buffer Register Group ---
+[TRCB0]
+Addr = 0x1E0140
+Size = 1
+Access = 1
+
+[TRCB1]
+Addr = 0x1E0141
+Size = 1
+Access = 1
+
+[TRCB2]
+Addr = 0x1E0142
+Size = 1
+Access = 1
+
+[TRCB3]
+Addr = 0x1E0143
+Size = 1
+Access = 1
+
+[TRCB4]
+Addr = 0x1E0144
+Size = 1
+Access = 1
+
+[TRCB5]
+Addr = 0x1E0145
+Size = 1
+Access = 1
+
+[TRCB6]
+Addr = 0x1E0146
+Size = 1
+Access = 1
+
+[TRCB7]
+Addr = 0x1E0147
+Size = 1
+Access = 1
+
+[TRCB8]
+Addr = 0x1E0148
+Size = 1
+Access = 1
+
+[TRCB9]
+Addr = 0x1E0149
+Size = 1
+Access = 1
+
+[TRCB10]
+Addr = 0x1E014A
+Size = 1
+Access = 1
+
+[TRCB11]
+Addr = 0x1E014B
+Size = 1
+Access = 1
+
+[TRCB12]
+Addr = 0x1E014C
+Size = 1
+Access = 1
+
+[TRCB13]
+Addr = 0x1E014D
+Size = 1
+Access = 1
+
+[TRCB14]
+Addr = 0x1E014E
+Size = 1
+Access = 1
+
+[TRCB15]
+Addr = 0x1E014F
+Size = 1
+Access = 1
+
+[TRCB16]
+Addr = 0x1E0150
+Size = 1
+Access = 1
+
+[TRCB17]
+Addr = 0x1E0151
+Size = 1
+Access = 1
+
+[TRCB18]
+Addr = 0x1E0152
+Size = 1
+Access = 1
+
+[TRCB19]
+Addr = 0x1E0153
+Size = 1
+Access = 1
+
+[TRCB20]
+Addr = 0x1E0154
+Size = 1
+Access = 1
+
+[TRCB21]
+Addr = 0x1E0155
+Size = 1
+Access = 1
+
+[TRCB22]
+Addr = 0x1E0156
+Size = 1
+Access = 1
+
+[TRCB23]
+Addr = 0x1E0157
+Size = 1
+Access = 1
+
+[TRCB24]
+Addr = 0x1E0158
+Size = 1
+Access = 1
+
+[TRCB25]
+Addr = 0x1E0159
+Size = 1
+Access = 1
+
+[TRCB26]
+Addr = 0x1E015A
+Size = 1
+Access = 1
+
+[TRCB27]
+Addr = 0x1E015B
+Size = 1
+Access = 1
+
+[TRCB28]
+Addr = 0x1E015C
+Size = 1
+Access = 1
+
+[TRCB29]
+Addr = 0x1E015D
+Size = 1
+Access = 1
+
+[TRCB30]
+Addr = 0x1E015E
+Size = 1
+Access = 1
+
+[TRCB31]
+Addr = 0x1E015F
+Size = 1
+Access = 1
+
+;--- Memory Protection Register Group ---
+[MS0_C]
+Addr = 0x1E03C0
+Size = 1
+
+[MS0_WT]
+Addr = 0x1E03C1
+Size = 1
+
+[MS0_CI]
+Addr = 0x1E03C2
+Size = 1
+
+[MS1_C]
+Addr = 0x1E03C8
+Size = 1
+
+[MS1_WT]
+Addr = 0x1E03C9
+Size = 1
+
+[MS1_CI]
+Addr = 0x1E03CA
+Size = 1
+
+[SDR_C]
+Addr = 0x1E03D0
+Size = 1
+
+[SDR_WT]
+Addr = 0x1E03D1
+Size = 1
+
+[SDR_CI]
+Addr = 0x1E03D2
+Size = 1
+
+[PU0]
+Addr = 0x1E03E0
+Size = 1
+
+[PU1]
+Addr = 0x1E03E1
+Size = 1
+
+[PU2]
+Addr = 0x1E03E2
+Size = 1
+
+[PU3]
+Addr = 0x1E03E3
+Size = 1
+
+[PU4]
+Addr = 0x1E03E4
+Size = 1
+
+[PU5]
+Addr = 0x1E03E5
+Size = 1
+
+[PU6]
+Addr = 0x1E03E6
+Size = 1
+
+[PU7]
+Addr = 0x1E03E7
+Size = 1
+
+[PU_SR]
+Addr = 0x1E03E8
+Size = 1
+
+[PU_CR]
+Addr = 0x1E03FC
+Size = 1
+
+[IDC_CR]
+Addr = 0x1E03FD
+Size = 1
+
+;--- JTAG Register Group ---
+;[EMUCTL]
+;Addr = 0x1F03A0
+
+;[EMUSTAT]
+;Addr = 0x1F03A1
+;Access = 1
+
+;[EMUDAT]
+;Addr = 0x1F03A2
+;Access = 1
+
+[IDCODE]
+Addr = 0x1F03A3
+Access = 1
+
+;[EMUIR_0]
+;Addr = 0x1F03A4
+;Access = 1
+
+;[EMUIR_1]
+;Addr = 0x1F03A5
+;Access = 1
+
+;[EMUIR_2]
+;Addr = 0x1F03A6
+;Access = 1
+
+;[EMUIR_3]
+;Addr = 0x1F03A7
+;Access = 1
+
+;[OSPID]
+;Addr = 0x1F03A9
+;Access = 1
+
+
+;**************************** END OF FILE 1967VN044.sfr **********************

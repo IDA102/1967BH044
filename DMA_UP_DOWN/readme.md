@@ -21,12 +21,11 @@
 2. '*.c' фаил.
 3. Правленный 'DDUC.h' файл.
 5. Скрин размеров входного и выходного файла(выходной файл в два раза меньше входного)
-![Optional Text](https://github.com/IDA102/MILANDER/blob/main/DMA_UP_DOWN/FAR.png)
+![Optional Text](https://github.com/IDA102/1967BH044/blob/master/DMA_UP_DOWN/FAR.png)
 7. Скрин выходной выборки.
-![Optional Text](https://github.com/IDA102/MILANDER/blob/main/DMA_UP_DOWN/SIN.png)
+![Optional Text](https://github.com/IDA102/1967BH044/blob/master/DMA_UP_DOWN/SIN.png)
 
 ## Вопросы и замечания
-
-
+-------------------------
 ## FIX_1
 1.[+] -------------------

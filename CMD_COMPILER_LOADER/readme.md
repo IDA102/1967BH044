@@ -33,7 +33,7 @@
 2. 'bat' фаил.
 3. 'm' фаил.
 4. Скрин работы
-![Optional Text](https://github.com/IDA102/MILANDER/blob/main/CMD_COMPILER_LOADER/CMD_ML.png)
+![Optional Text](https://github.com/IDA102/1967BH044/blob/master/CMD_COMPILER_LOADER/CMD_ML.png)
 
 ## Вопросы и замечания
 

@@ -21,6 +21,7 @@ UP_DOWN конвертер производит децимацию в соотв
 3. Правленный 'DDUC.h' файл.
 4. Скрин выходной выборки из файла.
 ![Optional Text](../master/ADC_LINK_DMA_UP_DOWN_DMA/ADC_DOWN.png)
+![diagram](ADC_DOWN.png.png)
 
 ## Вопросы и замечания
 1. Добавить '*.h' настроек DMA,LINK.

@@ -17,16 +17,8 @@ uint32_t __attribute((aligned(4))) TCB_TX[4] = {0,};//DMA_TX
 
 static  uint16_t __attribute__((aligned(4))) BUF_TX_RX[N];
 
-/*Определение типа памяти для контроллера DMA*/
-// Сделать макросом!!!
-int32_t HAL_DMA_INIT_MEM_TYPE(void* addr )
-{
-   if ((addr >= (0x00000000) && addr <= (0x0000FFFF)) || (addr >= 0x00040000 && addr <= (0x04FFFF)) ||	(addr >= 0x080000 && addr <= (0x08FFFF)) || (addr >= 0x0C0000 && addr <= (0x0CFFFF)) ||	(addr >= 0x100000 && addr <= (0x10FFFF)) || (addr >= 0x140000 && addr <= (0x14FFFF)))
-	{ puts("INTMEM"); return TCB_INTMEM16_16; }
-   else if((addr >= 0x30000000 && addr <= (0x44000000) ) || (addr >= 0x50000000 && addr <= (0x54000000)) || (addr >= 0x60000000 && addr <= (0x64000000)) || (addr >= 0x70000000 && addr <= (0x74000000)) || (addr >= 0x80000000 && addr <= (0xFFFFFFFF)))
-	{ puts("EXTMEM"); return TCB_EXTMEM16_16; }
-   else return -1;
-}
+/*ОПРЕДЕЛЕНИЯ ТИПА ПАМЯТИ И ТИПА ПЕРЕДАЧИ*/
+static int32_t HAL_DMA_INIT_MEM_TYPE( const void* addr );
 
 int main(int argc , char* argv[])
 {
@@ -37,7 +29,7 @@ int main(int argc , char* argv[])
   static FILE *FP_OUT;
   uint32_t TCB_TYPE_MEMORY = 0;
   uint32_t dducregs[8];
-  
+
   /*OPEN_READ_FILE_DATA*/
   //FP_IN  = fopen("W:/ML/MSO/DMA_UP_DOWN_CONVERTER/itest1.bin","r+b");
   FP_IN  = fopen("W:/ML/MSO/DMA_UP_DOWN_CONVERTER/IDDUC.bin","r+b");
@@ -78,6 +70,7 @@ int main(int argc , char* argv[])
   TCB_RX[1] = ((1020) << 16) | 4;             //DX 0xFFC0-MAX <----для 22/10
   TCB_RX[2] = 0;                              //DY
   TCB_RX[3] |= ( TCB_TYPE_MEMORY | TCB_QUAD); //DP
+
   //ПЕРЕГРУЗКА TX
   //HAL_DMA_CreateChannelDest(DMA_CH_RX,&TCB_RX,&TCB_RX);
 

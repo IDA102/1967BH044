@@ -66,20 +66,20 @@ int main(int argc , char* argv[])
   if(TCB_TYPE_MEMORY == -1){ puts("ERROR TYPE MEMORY - RX"); }
   HAL_DMA_RqstClr(DMA_CH_RX);//ОЧИСТКА ИСТОЧНИКА ЗАПРОСА DMA
   HAL_DMA_RqstSet(DMA_CH_RX, dmaUPDOWN0);//УСТАНОВКА НОВОГО ИСТОЧНИКА ОПРОСА ДЛЯ КАНАЛА DMA_CH_RX
-  TCB_RX[0] = ((void *)BUF_TX_RX);            //DI
-  TCB_RX[1] = ((1020) << 16) | 4;              //DX 0xFFC0-MAX <----для 22/10
-  TCB_RX[2] = 0;                              //DY
-  TCB_RX[3] |= ( TCB_TYPE_MEMORY | TCB_QUAD); //DP
+  TCB_RX[0] = ((void *)BUF_TX_RX);       					//DI
+  TCB_RX[1] = ((1020) << 16) | 4;        					//DX 0xFFC0-MAX <----для 22/10
+  TCB_RX[2] = 0;                         					//DY
+  TCB_RX[3] |= ( TCB_TYPE_MEMORY | DP_DMA_LENGTH_DATA_128 );//DP
 
   //ПЕРЕДАТЧИК
   TCB_TYPE_MEMORY = HAL_DMA_INIT_MEM_TYPE(&BUF_TX_RX);//ОПРЕДЕЛЕНИЕ ТИПА ИСПОЛЬЗУЕМОЙ ПАМЯТИ
   if(TCB_TYPE_MEMORY == -1){ puts("ERROR TYPE MEMORY - TX") ; }
   HAL_DMA_RqstClr(DMA_CH_TX);//ОЧИСТКА ИСТОЧНИКА ЗАПРОСА DMA
   HAL_DMA_RqstSet(DMA_CH_TX, dmaUPDOWN0);//УСТАНОВКА НОВОГО ИСТОЧНИКА ОПРОСА ДЛЯ КАНАЛА DMA_CH_TX
-  TCB_TX[0] = ((void *)BUF_TX_RX);            //DI
-  TCB_TX[1] = ((N/2) << 16) | 4;              //DX
-  TCB_TX[2] = 0;                              //DY
-  TCB_TX[3] |= ( TCB_TYPE_MEMORY | TCB_QUAD) ;//DP
+  TCB_TX[0] = ((void *)BUF_TX_RX);       					//DI
+  TCB_TX[1] = ((N/2) << 16) | 4;         					//DX
+  TCB_TX[2] = 0;                         					//DY
+  TCB_TX[3] |= ( TCB_TYPE_MEMORY | DP_DMA_LENGTH_DATA_128 );//DP
   
   while(fread((void *)BUF_TX_RX,sizeof(uint16_t),N,FP_IN))
   {

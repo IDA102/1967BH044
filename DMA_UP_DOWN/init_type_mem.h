@@ -1,9 +1,7 @@
-/*DMA_TYPE_MEMORY*/
-#define TCB_LINK        (0x20000000)
-#define TCB_INTMEM16_16 (0x40000000)
-#define TCB_INTMEM22_10 (0x60000000)
-#define TCB_EXTMEM16_16 (0x80000000)
-#define TCB_EXTMEM22_10 (0xE0000000)
+#include "DMA.h"
+
+#ifndef init_type_mem_H_
+#define init_type_mem_H_
 
 /*MEMORY_MAP*/
 #define INTERNAL_BANK_0(addr)      ((0x000000<=addr) && (addr<=0x00FFFF))
@@ -35,7 +33,7 @@ static int32_t HAL_DMA_INIT_MEM_TYPE( const void* addr )
      INTERNAL_BANK_5(addr))
     { 
       puts("INTERNAL BANK");
-      return TCB_INTMEM16_16; 
+      return DP_DMA_TYPE_EXCHANGE_INT_MEM_16_16;
     }
   else if( INTERNAL_REGISTERS(addr) )
     { 
@@ -50,7 +48,7 @@ static int32_t HAL_DMA_INIT_MEM_TYPE( const void* addr )
   else if(  SRAM_BANK_0(addr) || SRAM_BANK_1(addr) )
     { 
       puts("SRAM BANK");
-      return TCB_EXTMEM16_16; 
+      return DP_DMA_TYPE_EXCHANGE_EXT_MEM_16_16;
     }
   else if( SDRAM_BANK_0(addr) ||
            SDRAM_BANK_1(addr) ||
@@ -58,6 +56,7 @@ static int32_t HAL_DMA_INIT_MEM_TYPE( const void* addr )
            SDRAM_BANK_3(addr))
     {
       puts("SRAM BANK");
-      return TCB_EXTMEM16_16;
+      return DP_DMA_TYPE_EXCHANGE_EXT_MEM_16_16;
     }
 }
+#endif

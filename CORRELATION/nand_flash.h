@@ -3,6 +3,21 @@
 #ifndef nand_flash_H_
 #define nand_flash_H_
 
+#define NAND_BASE     (*(uint32_t*)(0x80000240))   // базовый адрес NAND контроллера
+#define NAND_IO_CFG   (*(uint32_t*)(NAND_BASE+0))  // регистр конфигурации временных параметров
+#define NAND_WCT_CFG  (*(uint32_t*)(NAND_BASE+1))  // pегистр конфигурации времени ожидания
+#define NAND_NAND_CFG (*(uint32_t*)(NAND_BASE+2))  // pегистр конфигурации протокола обмена
+#define NAND_WR_CFG   (*(uint32_t*)(NAND_BASE+3))  // pегистр команд записи
+#define NAND_RD_CFG   (*(uint32_t*)(NAND_BASE+4))  // pегистр команд чтения
+#define NAND_CR       (*(uint32_t*)(NAND_BASE+8))  // pегистр управления
+#define NAND_SR       (*(uint32_t*)(NAND_BASE+9))  // pегистр состояния
+#define NAND_AR       (*(uint32_t*)(NAND_BASE+10)) // pегистр начального адреса обмена
+#define NAND_CNTR     (*(uint32_t*)(NAND_BASE+11)) // cчетчик количества передаваемых слов
+#define NAND_DR       (*(uint32_t*)(NAND_BASE+12)) // буфер данных
+#define NAND_ERR12    (*(uint32_t*)(NAND_BASE+13)) // pегистр номеров ошибок 1 и 2
+#define NAND_ERR34    (*(uint32_t*)(NAND_BASE+14)) // pегистр номеров ошибок 3 и 4
+#define NAND_SP_BUF   (*(uint32_t*)(NAND_BASE+15)) // pегистр номера ошибочной подстраницы
+
 /*____________________________________IO_CFG____________________________________*/
 /*Данный регистр позволяет определить основные временные параметры протокола обмена. 
 Длительность стробов выражается количеством тактов частоты синхронизации, на которой работает контроллер. 
@@ -97,7 +112,7 @@
 #define NAND_BHT_5 0x20000 // 
 #define NAND_BHT_6 0x28000 // 
 #define NAND_BHT_7 0x30000 // 
-#define NAND_BHT_8 0x78000 //
+#define NAND_BHT_8 0x38000 //
 
 /*(18) "MDT" -Тип интерфейса. Используется совместно с VGA битом.*/ 
 //reset default - 0(0x0)
@@ -171,10 +186,10 @@
 
 /*(7:6) "COMCLR" - Число команд для чтения.*/ 
 //reset default - 01(0x40)
-#define NAND_COMCLW_1  0x00 // 1
-#define NAND_COMCLW_2  0x‬40 // 2
-#define NAND_COMCLW_R1  0x80 // не используется
-#define NAND_COMCLW_R2  0x‬C0 // не используется
+#define NAND_COMCLR_1  0x00 // 1
+#define NAND_COMCLR_2  0x‬40 // 2
+#define NAND_COMCLR_R1  0x80 // не используется
+#define NAND_COMCLR_R2  0x‬C0 // не используется
 
 /*(9:8) ADRCL" - Число адресных циклов.*/ 
 //reset default - 11(0x300)
@@ -274,8 +289,8 @@
 NAND флэш-памяти.*/
 
 /*(0) "EN" - Разрешение работы.*/ 
-#define NAND_ENABLE  0x0 //
-#define NAND_DISABLE 0x‬1 // 
+#define NAND_ENABLE  0x1 //
+#define NAND_DISABLE 0x‬0 // 
 
 /*(1) "RW" - Разрешение работы.*/ 
 #define NAND_READ  0x0 // чтение
@@ -379,6 +394,6 @@ typedef union
 
 /*____________________________________OTHER____________________________________*/
 /*Перечесление содержит имена моделей памяти Samsung для которых создан драйвер.*/
-typedef enum { K9F8G08UXM, K9F2G08X0B } SDRAM_TYPE;
+typedef enum { K9F8G08UXM, K9F2G08X0B } SDRAM_type;
 
 #endif

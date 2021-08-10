@@ -152,19 +152,32 @@ typedef union
   uint32_t REGISTER;
   struct
   {
-    unsigned ZERO_0       :10;
-    unsigned ONE          :1;
-    unsigned ZERO_1       :1;
-    unsigned ZERO_CFG1    :1;
-    unsigned MRSCOMP      :1;
-    unsigned BUSLKACT     :1;
-    unsigned ZERO_2       :1;
-    unsigned BROADREADERR :1;
-    unsigned AUTODMAERR   :1;
-    unsigned SDRAMERR     :1;
-    unsigned MPREADERR    :1;
-    unsigned ZERO_3       :12;
-  } BITE;
+    unsigned ZERO_0       :10; // всегда 0
+    unsigned ONE          :1;  // всегда 1
+    unsigned ZERO_1       :1;  // всегда 0
+    unsigned ZERO_CFG1    :1;  // бит 0 регистра CFG1
+    unsigned MRSCOMP      :1;  /* Признак окончания процедуры инициализации 
+                               динамической памяти:
+                               1 – завершена. Память готова к использованию
+                               0 – нет*/
+    unsigned BUSLKACT     :1;  /* Признак захвата шины:
+                               1 – текущий процессор стал мастером на шине и удерживает ее
+                               0 – нет захвата шины*/
+    unsigned ZERO_2       :1;  // всегда 0
+    unsigned BROADREADERR :1;  /*Ошибка доступа к адресному пространству 0x0С….:
+                               1 – была попытка чтения из указанного пространства
+                               0 – нет ошибки*/
+    unsigned AUTODMAERR   :1;  /*Признак ошибки в работе каналов AutoDMA:
+                               1 – была попытка записи в выключенный канал
+                               0 – нет ошибки*/
+    unsigned SDRAMERR     :1;  /* Признак ошибки доступа к SDRAM:
+                               1 – была попытка доступа неинициализированной внешней динамической памяти.
+                               0 – нет ошибки*/
+    unsigned MPREADERR    :1;  /*Признак ошибки чтения процессором запрещенного адресного пространства:
+                               1 – ошибка.
+                               0 – нет ошибки*/
+    unsigned ZERO_3       :12; // всегда 0
+  } WORD;
 } REGISTER_SYSTAT;
 
 #endif

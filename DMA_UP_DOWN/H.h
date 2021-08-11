@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "init_type_mem.h"
+#include "DDUC.h"
 
 /*OTHER*/
 #define NOP asm("nop;;")

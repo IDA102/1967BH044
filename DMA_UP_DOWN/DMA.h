@@ -30,6 +30,7 @@
 #define DP_DMA_CHANEL_10 0x100000‬ //канал 10
 #define DP_DMA_CHANEL_11 0x180000 ‬//канал 11
 
+
 /*(22) "CHEN" - Разрешение загрузки следующей цепочки. */ 
 #define DP_DMA_EN_CHEN  0x400000‬ //Разрешено
 #define DP_DMA_DIS_CHEN 0x000000 //Запрещено

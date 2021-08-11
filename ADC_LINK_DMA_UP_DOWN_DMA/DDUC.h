@@ -88,4 +88,6 @@
 /*(3) "overf" - Флаг состояния входного FIFO:*/
 #define SR_INPUT_OVERFLOW  0x00000008 //1 – перепполнение
 
+
+
 #endif

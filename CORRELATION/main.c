@@ -20,41 +20,27 @@ int main(void)
                    NAND_CCSE_1 | 
                    NAND_TOE_0 );/*LX_NAND->WCT_CFG.word = 0xFF;*/
   
-  NAND_IO_CFG = ( NAND_CSCA_7 |
-                  NAND_CA_32  |
-                  NAND_BWD_8  |
-                  NAND_BRT_15 |
-                  NAND_BHT_8  |
-                  NAND_MDT_0  |
-                  NAND_VGA_1  |
-                  NAND_CSKPL_1);/*LX_NAND->IO_CFG.word = 0x00A3FFFE;*/
+  NAND_IO_CFG = ( NAND_CSCA_7 | NAND_CA_32  |
+                  NAND_BWD_8  | NAND_BRT_15 |
+                  NAND_BHT_8  | NAND_MDT_0  |
+                  NAND_VGA_1  | NAND_CSKPL_1);/*LX_NAND->IO_CFG.word = 0x00A3FFFE;*/
   switch(MODEL)
   {
     case K9F8G08UXM:
       /*размер страницы 4КB*/
-      NAND_NAND_CFG = ( NAND_VOLCOL_4096       |
-                        NAND_ROWBT_3           |
-                        NAND_COMCLW_2          |
-                        NAND_COMCLR_2          |
-                        NAND_ADRCL_LINE_COLUMN |
-                        NAND_ADRSC_HAND_OVER   |
-                        NAND_DATSC_HAND_OVER   |
-                        NAND_COMSC_HAND_OVER   |
-                        (0x050000)             |
-                        (0xE00000) );// 0x00E5035C                
+      NAND_NAND_CFG = ( NAND_VOLCOL_4096       | NAND_ROWBT_3           |
+                        NAND_COMCLW_2          | NAND_COMCLR_2          |
+                        NAND_ADRCL_LINE_COLUMN | NAND_ADRSC_HAND_OVER   |
+                        NAND_DATSC_HAND_OVER   | NAND_COMSC_HAND_OVER   |
+                        (0x050000)             | (0xE00000) );// 0x00E5035C                
       break;
     case K9F2G08X0B:
       /*размер страницы 2КВ*/
-      NAND_NAND_CFG = ( NAND_VOLCOL_2048       |
-                        NAND_ROWBT_3           |
-                        NAND_COMCLW_2          |
-                        NAND_COMCLR_2          |
-                        NAND_ADRCL_LINE_COLUMN |
-                        NAND_ADRSC_HAND_OVER   |
-                        NAND_DATSC_HAND_OVER   |
-                        NAND_COMSC_HAND_OVER   |
-                        (0x050000)             |
-                        (0xE00000) ); // 0x00E5035B
+      NAND_NAND_CFG = ( NAND_VOLCOL_2048       | NAND_ROWBT_3           |
+                        NAND_COMCLW_2          | NAND_COMCLR_2          |
+                        NAND_ADRCL_LINE_COLUMN | NAND_ADRSC_HAND_OVER   |
+                        NAND_DATSC_HAND_OVER   | NAND_COMSC_HAND_OVER   |
+                        (0x050000)             | (0xE00000) ); // 0x00E5035B
       break;
 	}
   

@@ -28,13 +28,13 @@
         сигналов nRE или nWE.*/ 
 //reset default - 111(0x7)
 #define NAND_CSCA_1 0x0‬ // 
-#define NAND_CSCA_2 0x1‬ // 
+#define NAND_CSCA_2 0x1 // 
 #define NAND_CSCA_3 0x2 // 
 #define NAND_CSCA_4 0x3 // 
 #define NAND_CSCA_5 0x4 // 
-#define NAND_CSCA_6 0x5‬ // 
+#define NAND_CSCA_6 0x5 // 
 #define NAND_CSCA_7 0x6 // 
-#define NAND_CSCA_8 0x7‬ // 
+#define NAND_CSCA_8 0x7 // 
 
 /*(7:3) "CA" - Число периодов (+1) активности сигнала nRE во время чтения памяти.*/ 
 //reset default - 11111(0x8F)
@@ -59,7 +59,7 @@
 #define NAND_CA_19 0x‬90 // 
 #define NAND_CA_20 0x‬98 // 
 #define NAND_CA_21 0x‬A0 // 
-#define NAND_CA_22 0x‬A8 // 
+#define NAND_CA_22 0xA8 // 
 #define NAND_CA_23 0x‬B0 // 
 #define NAND_CA_24 0x‬B8 // 
 #define NAND_CA_25 0x‬C0 // 
@@ -69,7 +69,7 @@
 #define NAND_CA_29 0x‬E0 // 
 #define NAND_CA_30 0xE8‬ // 
 #define NAND_CA_31 0x‬F0 // 
-#define NAND_CA_32 0x‬F8 //
+#define NAND_CA_32 0xF8 //
 
 /*(10:8) "BWD" - Число периодов (+1) активности nWE во время записи.*/ 
 //reset default - 111(0x700)
@@ -80,7 +80,7 @@
 #define NAND_BWD_5 0x400 // 
 #define NAND_BWD_6 0x5‬00 // 
 #define NAND_BWD_7 0x600 // 
-#define NAND_BWD_8 0x7‬00 // 
+#define NAND_BWD_8 0x700 // 
 
 /*(14:11) "BRT" - Число периодов (+1) от момента снятия одного NF_CSx до момента активизации 
            NF_CSx другого банка, с целью избежать конфликт на шине данных.*/ 
@@ -116,7 +116,7 @@
 
 /*(18) "MDT" -Тип интерфейса. Используется совместно с VGA битом.*/ 
 //reset default - 0(0x0)
-#define NAND_MDT_0 0x00‬000 // 
+#define NAND_MDT_0 0x00000 // 
 #define NAND_MDT_1 0x40000‬ // 
 
 //reset default - 00(0x0)
@@ -125,7 +125,7 @@
 /*(21) "VGA" - Тип интерфейса. Имеет значение при установленном MDT.*/ 
 //reset default - 1(0x200000‬)
 #define NAND_VGA_0 0x00‬0000 // 
-#define NAND_VGA_1 0x200000‬ //
+#define NAND_VGA_1 0x200000 //
 
 /*(22) - Не используется. Значение безразлично.*/
 
@@ -143,7 +143,7 @@
 /*(3:0) "ENWT" - Разрешение анализа входа RnB во время обмена с одним из банков NF_CS[3:0].*/ 
 //reset default - 1111(0xF) NAND_ENWT_1
 #define NAND_ENWT_0 0x0‬ // RnB не анализируется
-#define NAND_ENWT_1 0xF‬ // RnB используется для анализа во время цикла обмена
+#define NAND_ENWT_1 0xF // RnB используется для анализа во время цикла обмена #define NAND_ENWT_1 0xF‬
 
 /*(7:4) "CCSE" - Разрешение анализа входа RnB во время обмена с одним из банков NF_CS[3:0].*/ 
 //reset default - 1111(0xF0)
@@ -175,19 +175,19 @@
 /*(3) "ROWBT" - Размер страницы.*/ 
 //reset default - 1(0x8)
 #define NAND_ROWBT_2  0x0 // 2 байта
-#define NAND_ROWBT_3  0x‬8 // 3 байта
+#define NAND_ROWBT_3  0x8 // 3 байта
 
 /*(5:4) "COMCLW" - Число команд для записи.*/ 
 //reset default - 01(0x10)
 #define NAND_COMCLW_1  0x00 // 1
-#define NAND_COMCLW_2  0x‬10 // 2
+#define NAND_COMCLW_2  0x10 // 2
 #define NAND_COMCLW_3  0x20 // 3 (расширенный режим)
 #define NAND_COMCLW_R  0x‬30 // не используется
 
 /*(7:6) "COMCLR" - Число команд для чтения.*/ 
 //reset default - 01(0x40)
-#define NAND_COMCLR_1  0x00 // 1
-#define NAND_COMCLR_2  0x‬40 // 2
+#define NAND_COMCLR_1   0x00 // 1
+#define NAND_COMCLR_2   0x40 // 2
 #define NAND_COMCLR_R1  0x80 // не используется
 #define NAND_COMCLR_R2  0x‬C0 // не используется
 
@@ -196,7 +196,7 @@
 #define NAND_ADRCL_1           0x000 // 1 цикл
 #define NAND_ADRCL_COLUMN      0x‬100 // только выбор столбца
 #define NAND_ADRCL_LINE        0x200 // только выбор строки
-#define NAND_ADRCL_LINE_COLUMN 0x‬300 // строка и столбец
+#define NAND_ADRCL_LINE_COLUMN 0x300 // строка и столбец
 
 /*(10) - Не используется.*/
 
@@ -391,7 +391,7 @@ typedef union
 } REGISTER_SR;
 
 /*Функция записывает в аргумент размер страницы в Кбайтах, на работу с которым сейчас настроен NAND контролер.*/
-static void NAND_GET_SIZE_PAGE(uint32_t* RAZMER)
+static void NAND_GET_SIZE_PAGE( uint32_t* RAZMER )
 {
   switch (NAND_NAND_CFG & 0x7)// Первые 3 бита (2:0) регистра NAND_CFG
   {

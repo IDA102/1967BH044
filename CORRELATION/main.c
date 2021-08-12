@@ -26,7 +26,7 @@ int main(void)
                   NAND_VGA_1  | NAND_CSKPL_1);/*LX_NAND->IO_CFG.word = 0x00A3FFFE;*/
   switch(MODEL)
   {
-    case K9F8G08UXM:
+    case _UXM:
       /*размер страницы 4КB*/
       NAND_NAND_CFG = ( NAND_VOLCOL_4096       | NAND_ROWBT_3           |
                         NAND_COMCLW_2          | NAND_COMCLR_2          |
@@ -34,7 +34,7 @@ int main(void)
                         NAND_DATSC_HAND_OVER   | NAND_COMSC_HAND_OVER   |
                         (0x050000)             | (0xE00000) );// 0x00E5035C                
       break;
-    case K9F2G08X0B:
+    case _X0B:
       /*размер страницы 2КВ*/
       NAND_NAND_CFG = ( NAND_VOLCOL_2048       | NAND_ROWBT_3           |
                         NAND_COMCLW_2          | NAND_COMCLR_2          |
@@ -49,7 +49,7 @@ int main(void)
 	NAND_CR = NAND_ENABLE; // LX_NAND->CR.word = 0x1;
   
   /*Размер страницы в Кбайтах, на работу с которым сейчас настроен NAND контролер.*/
-  GET_SIZE_NAND_PAGE(PAGE_SIZE);
+  NAND_GET_SIZE_PAGE( PAGE_SIZE );
   
   /*Очистка блока памяти*/
   Driver_NANDSamsung_EraseBlocks(0, 1); 
@@ -60,7 +60,7 @@ int main(void)
   {
     MASS_IN[i] = i+1;
   }
-  Driver_NANDSamsung_WriteBust(&MASS_IN, 0, 100);
+  Driver_NANDSamsung_WriteBurst(&MASS_IN, 0, 100);
   
   
   /*Чтение данных из NAND памяти*/

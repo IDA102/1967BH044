@@ -9,9 +9,12 @@
 #include "board.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "DMA.h"
 #include "init_type_mem.h"
 #include "sdram.h"
 #include "nand_flash.h"
+#include <driver1967VN044_NANDSamsung.h>
+
 
 /*OTHER*/
 #define NOP asm("nop;;")

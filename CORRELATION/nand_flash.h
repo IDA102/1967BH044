@@ -415,6 +415,7 @@ static void NAND_GET_SIZE_PAGE( uint32_t* RAZMER )
 
 /*____________________________________OTHER____________________________________*/
 /*Перечесление содержит имена моделей памяти Samsung для которых создан драйвер.*/
-typedef enum { K9F8G08UXM, K9F2G08X0B } SDRAM_type;
+//K9F8G08UXM, K9F2G08X0B
+typedef enum { _UXM, _X0B } SDRAM_type;
 
 #endif

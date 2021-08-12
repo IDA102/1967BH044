@@ -395,12 +395,12 @@ static void NAND_GET_SIZE_PAGE( uint32_t* RAZMER )
 {
   switch (NAND_NAND_CFG & 0x7)// Первые 3 бита (2:0) регистра NAND_CFG
   {
-    case 0: *RAZMER = 128 ; puts("PAGE SIZE 128KB") ; break;
+    case 0: *RAZMER = 128 ; puts("PAGE SIZE 128KB") ;   break;
     case 1: *RAZMER = 512 ; puts("PAGE SIZE 512KB") ;	break;
-    case 2: *RAZMER = 1024;	puts("PAGE SIZE 1024KB");	break;
-    case 3: *RAZMER = 2048;	puts("PAGE SIZE 2048KB");	break;
-    case 4: *RAZMER = 4096;	puts("PAGE SIZE 4096KB");	break;
-    case 5: *RAZMER = 8192;	puts("PAGE SIZE 8192KB");	break;
+    case 2: *RAZMER = 1024; puts("PAGE SIZE 1024KB");	break;
+    case 3: *RAZMER = 2048; puts("PAGE SIZE 2048KB");	break;
+    case 4: *RAZMER = 4096; puts("PAGE SIZE 4096KB");	break;
+    case 5: *RAZMER = 8192; puts("PAGE SIZE 8192KB");	break;
   }
 }
 

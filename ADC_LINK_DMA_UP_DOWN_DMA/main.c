@@ -1,13 +1,7 @@
 #include "H.h"
-#include "DDUC.h"
 
 /*Режим 22/10 - увелечение DXM до 22 бит, и  уменьшение DXC до 10 бит.
 Увеличивает смещение адреса >32768 */
-
-//[+] Подцепить ADC
-//[+] Подцепить LINK
-//[+] Подцепить LINK - DOWN
-//[+] Подцепить DMA(DOWN->MEMORY) 
 
 #define DDUC_BASE0_STEP_OFFSET (*(uint32_t*)(DDUC_BASE0+DDUC_STEP_OFFSET))
 #define DDUC_BASE0_CR_OFFSET   (*(uint32_t*)(DDUC_BASE0+DDUC_CR_OFFSET))
@@ -21,17 +15,9 @@ uint32_t __attribute((aligned(4))) TCB_RX[4] = {0,};//DMA_RX
 static  uint32_t __attribute__((aligned(4))) BUF_RX[N]; 
 
 /*Определение типа памяти для контроллера DMA*/
-// Сделать макросом!!! + Расширить для *MEM22_10
-int32_t HAL_DMA_INIT_MEM_TYPE(void* addr )
-{
-   if ((addr >= (0x00000000) && addr <= (0x0000FFFF)) || (addr >= 0x00040000 && addr <= (0x04FFFF)) ||	(addr >= 0x080000 && addr <= (0x08FFFF)) || (addr >= 0x0C0000 && addr <= (0x0CFFFF)) ||	(addr >= 0x100000 && addr <= (0x10FFFF)) || (addr >= 0x140000 && addr <= (0x14FFFF)))
-		{ puts("INTMEM"); return TCB_INTMEM16_16; }
-	else if((addr >= 0x30000000 && addr <= (0x44000000) ) || (addr >= 0x50000000 && addr <= (0x54000000)) || (addr >= 0x60000000 && addr <= (0x64000000)) || (addr >= 0x70000000 && addr <= (0x74000000)) || (addr >= 0x80000000 && addr <= (0xFFFFFFFF)))
-		{ puts("EXTMEM"); return TCB_EXTMEM16_16; }
-	else return -1;
-}
+static int32_t HAL_DMA_INIT_MEM_TYPE(const void* addr );
 
-int main(int argc , char* argv[])
+int main(void)
 {
   size_t DMA_CNT = 1;
   size_t IQ_CNT  = 0;
@@ -41,6 +27,19 @@ int main(int argc , char* argv[])
   uint32_t TCB_TYPE_MEMORY = 0;
 
   BRD_init();
+  
+    /*OPEN_READ_FILE_SETTING_UPDOWN*/
+  //динамический массив,что бы не тащить массив dducregs[3] через весь алгоритм,т.к. нужен 1 раз
+  uint32_t* dducregs = (uint32_t*) calloc(3,sizeof(uint32_t));
+  FP_IN = fopen("SETTING_UPDOWN.bin","r+b");
+  if(FP_IN == 0){ puts("NOT OPEN FILE SETTING UPDOWN.bin") ; return -1; }
+  fread(dducregs,3,sizeof(uint32_t),FP_IN);
+  fclose(FP_IN);
+  
+  DDUC_BASE0_STEP_OFFSET = dducregs[0];
+  DDUC_BASE0_CR_OFFSET   = dducregs[1];
+  FLAG_SETTING_UPDOWN    = dducregs[2];
+  free(dducregs);
   
   /*OPEN_WRITE_FILE_DATA*/
   FP_OUT = fopen("W:/ML/MSO/DMA_UP_DOWN_CONVERTER/ODDUC.bin","w+b");
@@ -65,6 +64,7 @@ int main(int argc , char* argv[])
 	ADC_CFG.lvds_current_mode = ADC5101HB015_LVDS_CURRENT_NORMAL;
 	ADC_CFG.oen_pin_override  = ADC5101HB015_OEN_OVERRIDE;
 	ADC_CFG.common_mode_sel   = ADC5101HB015_COMMON_MODE_0P75;
+  
   //Инициализация АЦП 0 и 1 (сброс, калибровка, отправка конфигурации регистров по spi)
 	ADC5101HB015_init( 1, 1, &ADC_SPI_CFG );
 	ADC5101HB015_config( &ADC_CFG );
@@ -73,9 +73,6 @@ int main(int argc , char* argv[])
   //RX
 	LinkRx_Init_type LINK_ADC_INI_STR; //Структура для описания внешенего устройства с LINK интерфейсом (от кого принимаем)
   LinkRxEx_type    LINK_RX_INI_STR;  //Структура для инициализации приемника LINK порта
-
-  //Деинициализация приемника LINK порта  0
-	HAL_LinkRx_Disable(0);
 
 	LINK_RX_INI_STR.AdcDataSize = Link_AdcDataSize_14b;
 	LINK_RX_INI_STR.Rcode 		  = Link_Rcode_Dis;
@@ -89,13 +86,14 @@ int main(int argc , char* argv[])
 	LINK_ADC_INI_STR.OVRIntEn 	= Link_OvrIT_Dis;
 	LINK_ADC_INI_STR.TOIntEn    = Link_TOIT_Dis;
 
+  //Деинициализация приемника LINK порта  0
+	HAL_LinkRx_Disable(0);
+
   //Инициализация приемника LINK порта  0
 	HAL_LinkRx_Enable( 0, &LINK_ADC_INI_STR,  &LINK_RX_INI_STR );
 
   //TX
-  //Деинициализация передатчика LINK порта  0
-	HAL_LinkTx_Disable(0);
-  
+  //Инициализации передатчика LINK порта
 	LinkTx_Init_type  LINK_TX_INI_STR;//Структура для инициализации передатчика LINK порта
   LinkTxEx_type     LINK_DOWN_INI_STR;
   
@@ -108,23 +106,29 @@ int main(int argc , char* argv[])
 	LINK_TX_INI_STR.CheckSum   = Link_CheckSum_Dis;
 	LINK_TX_INI_STR.TOIntEn    = Link_TOIT_Dis;
 	LINK_TX_INI_STR.ClkSource  = Link_TxClk_Master;
-	  
+	 
+  //Деинициализация передатчика LINK порта  0
+  HAL_LinkTx_Disable(0);     
+  
   //Инициализация передатчика LINK порта  0
 	HAL_LinkTx_Enable( 0, &LINK_DOWN_INI_STR, &LINK_TX_INI_STR  );
 
   /*SETTINGS UP/DOWN*/
-  DDUC_BASE0_STEP_OFFSET = 23593;//REG_STEP
-  DDUC_BASE0_CR_OFFSET   = SR_DDUC_ENABLE    |
-                           SR_FIR_TAP*15     |
-                           SR_SRC_LINK       |
-                           SR_ROUND_OFF      |
-                           SR_SATURATION_OFF |
-                           SR_ROUNDM_OFF     |
-                           SR_FIR_ORDER3     |
-                           SR_INPUT_BE       |
-                           SR_OUTPUT_LE      |
-                           SR_MODE_DDC       |
-                           SR_SHIFT*15;// default - 0x101
+  if ( FLAG_SETTING_UPDOWN == 0)
+  {
+    DDUC_BASE0_STEP_OFFSET = 23593;//REG_STEP
+    DDUC_BASE0_CR_OFFSET   = SR_DDUC_ENABLE    |
+                             SR_FIR_TAP*15     |
+                             SR_SRC_LINK       |
+                             SR_ROUND_OFF      |
+                             SR_SATURATION_OFF |
+                             SR_ROUNDM_OFF     |
+                             SR_FIR_ORDER3     |
+                             SR_INPUT_BE       |
+                             SR_OUTPUT_LE      |
+                             SR_MODE_DDC       |
+                             SR_SHIFT*15;// default - 0x101
+  }
   /*SETTING DMA*/
   //ПРИЁМНИК
   TCB_TYPE_MEMORY = HAL_DMA_INIT_MEM_TYPE(&BUF_RX);//ОПРЕДЕЛЕНИЕ ТИПА ИСПОЛЬЗУЕМОЙ ПАМЯТИ
@@ -132,14 +136,14 @@ int main(int argc , char* argv[])
   HAL_DMA_RqstClr(DMA_CH_RX);                 //ОЧИСТКА ИСТОЧНИКА ЗАПРОСА DMA
   HAL_DMA_RqstSet(DMA_CH_RX, dmaUPDOWN0);     //УСТАНОВКА НОВОГО ИСТОЧНИКА ОПРОСА ДЛЯ КАНАЛА DMA_CH_RX
   TCB_RX[0] = ((void *)BUF_RX);               //DI
-  TCB_RX[1] = ((N) << 16) | 4;              //DX 0xFFC0-MAX <----из-за 22/10
+  TCB_RX[1] = ((N) << 16) | 4;                //DX
   TCB_RX[2] = 0;                              //DY
   TCB_RX[3] |= ( TCB_TYPE_MEMORY | TCB_QUAD); //DP
 
   while(DMA_CNT != 8)
   {
     /*WRITE_SETTING_IN_DMA*/
-    HAL_DMA_Stop( 8 );//ВЫКЛЮЧЕНИЕ DMA ПРИЁМНИКА-------------------------------------- НЕ КОРРЕКТНО РАБОТАЕТ ЕСЛИ НЕ ВЫКЛЮЧАТЬ!!!!!!
+    HAL_DMA_Stop( 8 );//ВЫКЛЮЧЕНИЕ DMA ПРИЁМНИКА----- НЕ КОРРЕКТНО РАБОТАЕТ ЕСЛИ НЕ ВЫКЛЮЧАТЬ!!!!!!
     HAL_DMA_WriteDC(DMA_CH_RX, &TCB_RX);//ЗАПИСЬ СТРУКТУРЫ В РЕГИСТР TCB И ЗАПУСК РАБОТЫ КАНАЛА DMA_CH_TX
 
     /*MAIN_1*/

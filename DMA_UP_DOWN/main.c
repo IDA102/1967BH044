@@ -6,7 +6,7 @@
 #define DDUC_BASE0_STEP_OFFSET (*(uint32_t*)(DDUC_BASE0+DDUC_STEP_OFFSET))
 #define DDUC_BASE0_CR_OFFSET (*(uint32_t*)(DDUC_BASE0+DDUC_CR_OFFSET))
 
-#define N 32768//КОЛИЧЕСТВО ЭЛЕМЕНТОВ В МАССИВЕ ПРИЁМНИКА
+#define N 32768    //КОЛИЧЕСТВО ЭЛЕМЕНТОВ В МАССИВЕ ПРИЁМНИКА
 #define DMA_CH_RX 8//НОМЕР DMA ПРИЁМНИКА ( УСТРОЙСТВО -> ПАМЯТЬ )
 #define DMA_CH_TX 7//НОМЕР DMA ПЕРЕДАТЧИКА ( ПАМЯТЬ -> УСТРОЙСТВО )
 
@@ -19,45 +19,54 @@ uint32_t __attribute((aligned(4))) TCB_TX[4] = {0,};//DMA_TX
 
 static  uint16_t __attribute__((aligned(4))) BUF_TX_RX[N];
 
-int main(int argc , char* argv[])
+int main(void)
 {
   static FILE *FP_IN;
   static FILE *FP_OUT;
   size_t DMA_CNT = 1;
   size_t IQ_CNT  = 0;
   size_t ErrFlag = 0;
+  uint32_t FLAG_SETTING_UPDOWN = 0;// сделать динамическим,т.к. нужен 1 раз
   uint32_t TCB_TYPE_MEMORY = 0;
-  uint32_t dducregs[8];
+
+  /*OPEN_READ_FILE_SETTING_UPDOWN*/
+  //динамический массив,что бы не тащить массив dducregs[3] через весь алгоритм,т.к. нужен 1 раз
+  uint32_t* dducregs = (uint32_t*) calloc(3,sizeof(uint32_t));
+  FP_IN = fopen("W:/ML/MSO/DMA_UP_DOWN_CONVERTER/SETTING_UPDOWN.bin","r+b");
+  if(FP_IN == 0){ puts("NOT OPEN FILE SETTING UPDOWN.bin") ; return -1; }
+  fread(dducregs,3,sizeof(uint32_t),FP_IN);
+  fclose(FP_IN);
+  
+  DDUC_BASE0_STEP_OFFSET = dducregs[0];
+  DDUC_BASE0_CR_OFFSET   = dducregs[1];
+  FLAG_SETTING_UPDOWN    = dducregs[2];
+  free(dducregs);
 
   /*OPEN_READ_FILE_DATA*/
-  FP_IN  = fopen("W:/ML/MSO/DMA_UP_DOWN_CONVERTER/itest4.bin","r+b");
-  //FP_IN  = fopen("W:/ML/MSO/DMA_UP_DOWN_CONVERTER/IDDUC.bin","r+b");
-  if(FP_IN == 0){ puts("NOT OPEN FILE READ.bin") ; return -1; }
+  //FP_IN  = fopen("W:/ML/MSO/DMA_UP_DOWN_CONVERTER/itest1.bin","r+b");
+  FP_IN  = fopen("W:/ML/MSO/DMA_UP_DOWN_CONVERTER/IDDUC.bin","r+b");
+  if(FP_IN == 0){ puts("NOT OPEN FILE READ IDDUC.bin") ; return -1; }
 
   /*WRITE_FILE_DATA*/
   FP_OUT = fopen("W:/ML/MSO/DMA_UP_DOWN_CONVERTER/ODDUC.bin","w+b");
   if(FP_OUT == 0){ puts("NOT OPEN FILE ODDUC.bin") ; fclose(FP_IN); return -1;}
   
   /*SETTINGS UP/DOWN*/
-  DDUC_BASE0_STEP_OFFSET = 23593;//REG_STEP
-  DDUC_BASE0_CR_OFFSET = SR_DDUC_ENABLE    |
-                         SR_FIR_TAP*15     |
-                         SR_SRC_DR         |
-                         SR_ROUND_OFF      |
-                         SR_SATURATION_OFF |
-                         SR_ROUNDM_OFF     |
-                         SR_FIR_ORDER3     |
-                         SR_INPUT_BE       |
-                         SR_OUTPUT_LE      |
-                         SR_MODE_DDC       |
-                         SR_SHIFT*15;// default - 0x101
-  
-/*
-  // data and regs DDUC incapsulation
-  fread(dducregs,sizeof(dducregs),1,FP_IN) ;
-  DDUC_BASE0_STEP_OFFSET = dducregs[0] ;
-  DDUC_BASE0_CR_OFFSET   = dducregs[1] ;
-*/
+  if ( FLAG_SETTING_UPDOWN == 0)
+  {
+    DDUC_BASE0_STEP_OFFSET = 23593;//REG_STEP
+    DDUC_BASE0_CR_OFFSET = SR_DDUC_ENABLE    |
+                           SR_FIR_TAP*15     |
+                           SR_SRC_DR         |
+                           SR_ROUND_OFF      |
+                           SR_SATURATION_OFF |
+                           SR_ROUNDM_OFF     |
+                           SR_FIR_ORDER3     |
+                           SR_INPUT_BE       |
+                           SR_OUTPUT_LE      |
+                           SR_MODE_DDC       |
+                           SR_SHIFT*15;// default - 0x101
+  }
   
   /*SETTING DMA*/
   //ПРИЁМНИК

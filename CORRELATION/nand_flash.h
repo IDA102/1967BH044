@@ -38,8 +38,8 @@
 
 /*(7:3) "CA" - Число периодов (+1) активности сигнала nRE во время чтения памяти.*/ 
 //reset default - 11111(0x8F)
-#define NAND_CA_1  0x00‬  // 
-#define NAND_CA_2  0x08  // 
+#define NAND_CA_1  0x00‬ // 
+#define NAND_CA_2  0x08 // 
 #define NAND_CA_3  0x10 // 
 #define NAND_CA_4  0x18 // 
 #define NAND_CA_5  0x20 // 
@@ -141,14 +141,14 @@
 программировать максимальное время ожидания.*/
 
 /*(3:0) "ENWT" - Разрешение анализа входа RnB во время обмена с одним из банков NF_CS[3:0].*/ 
-//reset default - 1111(0xF)
+//reset default - 1111(0xF) NAND_ENWT_1
 #define NAND_ENWT_0 0x0‬ // RnB не анализируется
 #define NAND_ENWT_1 0xF‬ // RnB используется для анализа во время цикла обмена
 
 /*(7:4) "CCSE" - Разрешение анализа входа RnB во время обмена с одним из банков NF_CS[3:0].*/ 
 //reset default - 1111(0xF0)
 #define NAND_CCSE_0 0x00‬ // установить неактивный уровень если RnB =0
-#define NAND_CCSE_1 0xF‬0 // разрешить активный уровень на NF_CSx во время RnB=0
+#define NAND_CCSE_1 0xF0 // разрешить активный уровень на NF_CSx во время RnB=0
 
 /*(30:21) "WTOC" - Длительность периода “time-out”. Эти биты определяют длительность периода, 
           используемого для контроля ситуации “time-out”. Превышение длительности RnB=0 над 
@@ -157,8 +157,8 @@
 
 /*(31) "TOE" - Разрешение контроля ситуации “time-out”.*/ 
 //reset default - 0(0x0)
-#define NAND_TOE_0 0x00‬000000 // запрещено
-#define NAND_TOE_1 0x80000000 // разрешено
+#define NAND_TOE_0 0x00000000 // запрещено
+#define NAND_TOR_1 0x80000000 // разрешено
 
 /*____________________________________NAND_CFG____________________________________*/
 /*Позволяет задать основные параметры флэш-памяти и режимы работы.*/
@@ -290,7 +290,7 @@ NAND флэш-памяти.*/
 
 /*(0) "EN" - Разрешение работы.*/ 
 #define NAND_ENABLE  0x1 //
-#define NAND_DISABLE 0x‬0 // 
+#define NAND_DISABLE 0x0 // 
 
 /*(1) "RW" - Разрешение работы.*/ 
 #define NAND_READ  0x0 // чтение
@@ -390,7 +390,28 @@ typedef union
   } WORD;
 } REGISTER_SR;
 
+/*Функция записывает в аргумент размер страницы в Кбайтах, на работу с которым сейчас настроен NAND контролер.*/
+static void NAND_GET_SIZE_PAGE(uint32_t* RAZMER)
+{
+  switch (NAND_NAND_CFG & 0x7)// Первые 3 бита (2:0) регистра NAND_CFG
+  {
+    case 0: *RAZMER = 128 ; puts("PAGE SIZE 128KB") ; break;
+    case 1: *RAZMER = 512 ; puts("PAGE SIZE 512KB") ;	break;
+    case 2: *RAZMER = 1024;	puts("PAGE SIZE 1024KB");	break;
+    case 3: *RAZMER = 2048;	puts("PAGE SIZE 2048KB");	break;
+    case 4: *RAZMER = 4096;	puts("PAGE SIZE 4096KB");	break;
+    case 5: *RAZMER = 8192;	puts("PAGE SIZE 8192KB");	break;
+  }
+}
 
+//!!!!!  НЕ готова !!!!!
+/*Функция очищает заданное количество Мбайт, начиная с нулевого адреса в NAND контролере.*/
+/*static void NAND_ERASE_MEM(const uint32_t SIZE)
+{
+  uint32_t BLOCK,PAGE_SIZE;
+  PAGE_SIZE = (NAND_NAND_CFG & 0x7);
+  BLOCK = ((1024*1024) * SIZE)/(64 * PAGE_SIZE);
+}*/
 
 /*____________________________________OTHER____________________________________*/
 /*Перечесление содержит имена моделей памяти Samsung для которых создан драйвер.*/

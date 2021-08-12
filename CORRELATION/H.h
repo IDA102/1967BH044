@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include "init_type_mem.h"
 #include "sdram.h"
+#include "nand_flash.h"
 
 /*OTHER*/
 #define NOP asm("nop;;")

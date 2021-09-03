@@ -1,6 +1,10 @@
-/*Описание что делает*/
-//[+] bank 0 & 1
-//[+] ping pong
+/*
+Сохраняет дескреты АЦП в ROM.
+ADC->LINK->DMA->ROM
+----------------------------
+Проблема с арбитражом шины.
+*/
+
 #include <hal_1967VN044.h>
 #include "hal_1967VN044.h"
 #include <builtins.h>
@@ -30,8 +34,8 @@
 #endif
 
 #define N_PI_PO       1020*3//65532 //КОЛИЧЕСТВО ЭЛЕМЕНТОВ В МАССИВАХ PING & PONG, кратные 4.
-#define S             10
-#define N             N_PI_PO*5//65532 //КОЛИЧЕСТВО ЭЛЕМЕНТОВ В МАССИВАХ PING & PONG, кратные 4.
+#define S             100
+#define N             N_PI_PO*S//65532 //КОЛИЧЕСТВО ЭЛЕМЕНТОВ В МАССИВАХ PING & PONG, кратные 4.
 
 #define DMA_CH_OUTPUT 8   //НОМЕР DMA ПРИЁМНИКА ( УСТРОЙСТВО -> ПАМЯТЬ )
 #define OUTPUTFNAME   "w:/MILANDR/MSO/CURRENT_FOLDER/1967BH044/1967BH044/oddc.bin"
@@ -48,11 +52,9 @@ __attribute__((section("datasectionping"))) uint32_t samples_ping_mem[N];// max 
 //__attribute__((aligned(4)))
 //__attribute__((section("datasectionpong"))) uint32_t samples_pong_mem[N_PI_PO*2];// max 1'107'296'256‬ по 32(размер одного банка)
 
-__attribute__((aligned(4))) uint32_t samples_ping[N_PI_PO];
-__attribute__((aligned(4))) uint32_t samples_pong[N_PI_PO];
-
 static uint32_t flag,cnt;
-static uint32_t ADDR = 0x10000000+N_PI_PO;
+//static uint32_t ADDR = (0x10000000+N_PI_PO);
+static uint32_t* ADDR = (0x10000000+N_PI_PO);
 
 //Функция обработчика прерывания DMA PING PONG
 __attribute((interrupt))
@@ -64,7 +66,7 @@ static void dma_handler()
 	  return;
   }
   cnt++;
-  ADDR = ADDR + N_PI_PO;
+  ADDR += N_PI_PO;
   flag = flag ^ 0x00000001;
   if(flag == 1)
   {
@@ -89,17 +91,12 @@ int main(void)
   LinkRx_Init_type         LINK_ADC_INI_STR; //Структура для описания внешенего устройства с LINK интерфейсом (от кого принимаем)
   LinkRxEx_type            LINK_RX_INI_STR;  //Структура для инициализации приемника LINK порта
 
-  //BRD_init();
-
-  num_bank(samples_ping);
-  num_bank(samples_pong);
-
   /*SDRAM*/
   HAL_PLL_CoreSetup(CORE_CLK_kHz);
   HAL_PLL_BusSetup(BUS_CLK_kHz);
 
   HAL_SYS_FlagEnable();
-  __builtin_sysreg_write(__FLAGREG, 0xEF); //START//EF
+  __builtin_sysreg_write(__FLAGREG, 0x01); //START//0xEF
 
   LX_CMU->CFG1.b.SYS_WE = 1; //ВКЛЮЧИТЬ МНОЖЕСТВЕННУЮ ЗАПИСЬ В SYSCON/SDRCON - Multiple write to SYSCON/SDRCON enable
 
@@ -110,25 +107,14 @@ int main(void)
                 SDRCON_REF3700 |
                 SDRCON_PC2RAS2 |
                 SDRCON_RAS2PC2 |
-                SDRCON_EMRS    ;
-  		        SDRCON_INIT    ;
-   /* sdrconValue = SDRCON_INIT    |
-      SDRCON_RAS2PC8 |
-      SDRCON_PC2RAS5 |
-      SDRCON_REF3700 |
-      SDRCON_PG256   |
-      SDRCON_CLAT3   |
-      SDRCON_ENBL;*/
-
+                SDRCON_EMRS    |
+                SDRCON_INIT    ;
   //SYSCON Bus and GPIO
   SYSCON_BusConfig(DATA_BUS_WIDTH);
   HAL_SYS_ExtBusEnable(SYS_BUS);
   HAL_SYS_SDRAMEnable(sdrconValue);
-
-  for( uint32_t i = 0 ; i < N ; i++)
-  {
-   *(uint32_t*)(0x10000000+i) = 0;
-  }
+  //BRD_init();-------------------------------------------------------------------------------------
+  for( uint32_t i = 0 ; i < N ; i++) {*(uint32_t*)(0x10000000+i) = 0;}
 
 /* Инициализация АЦП 0 по spi*/
 // Задание выводов SPI интерфейса АЦП 0 и 1
@@ -184,13 +170,15 @@ int main(void)
   otcb_ping_1[2] = 0;                       //DY
   otcb_ping_1[3] |= TCB_TYPE_MEMORY        |
                     DP_DMA_LENGTH_DATA_128 |
-					DP_DMA_INT_EN          ; //DP
+					          DP_DMA_HIGH_PRIORITY   |
+					          DP_DMA_INT_EN          ;//DP
 
   otcb_pong_1[0] = (void*)(0x10000000+N_PI_PO);   //DI
   otcb_pong_1[1] = ((N_PI_PO<<16) | 4);     //DX
   otcb_pong_1[2] = 0;                       //DY
   otcb_pong_1[3] |= TCB_TYPE_MEMORY        |
                     DP_DMA_LENGTH_DATA_128 |
+					          DP_DMA_HIGH_PRIORITY   |
                     DP_DMA_INT_EN          ;//DP
 
 //Создание цепочки PING PONG
@@ -203,7 +191,6 @@ int main(void)
 /*Включение PING PONG*/
   HAL_DMA_WriteDC(DMA_CH_OUTPUT, otcb_ping_1);
   HAL_SYS_WaitClk( 300000000 );//600000000
-
   printf("int - %i\n",cnt);
 
   ofid = fopen(OUTPUTFNAME,"w+b") ; if(ofid == 0){ puts("Unable open oddc.bin.");}
